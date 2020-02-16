@@ -3,8 +3,8 @@
 ## JavaWeb高级编程
 
 1.  视频教程
-    - [Angular7]()(百度云下载密码：)
-    - [SprintBoot]()(百度云下载密码：)
+    - [Angular7](2020/tutorial/angular7.html)
+    - [SprintBoot](2020/tutorial/springboot.html)
 2. 课程讲义
     - 第01章 [-](2020/01/)
     - 第02章 [-](2020/02/)
