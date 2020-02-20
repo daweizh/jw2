@@ -1,0 +1,1156 @@
+<!DOCTYPE html><html><head>
+      <title>front-design</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+      
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+      <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66519574" charset="UTF-8"></script>
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="%E7%AC%AC2%E7%AB%A0-%E5%89%8D%E7%AB%AF%E8%AE%BE%E8%AE%A1">&#x7B2C;2&#x7AE0; &#x524D;&#x7AEF;&#x8BBE;&#x8BA1;</h1>
+
+<h2 class="mume-header" id="21-%E6%95%B4%E4%BD%93%E9%A3%8E%E6%A0%BC%E8%AE%BE%E8%AE%A1">2.1 &#x6574;&#x4F53;&#x98CE;&#x683C;&#x8BBE;&#x8BA1;</h2>
+
+<ol>
+<li>style1<br>
+<img src="images/style-01.png" alt></li>
+<li>style2<br>
+<img src="images/style-02.png" alt></li>
+<li>style3<br>
+<img src="images/style-03.png" alt></li>
+<li>style4<br>
+<img src="images/style-04.png" alt></li>
+<li>style5<br>
+<img src="images/style-05.png" alt></li>
+<li>style6<br>
+<img src="images/style-06.png" alt></li>
+<li>login<br>
+<img src="images/login-01.png" alt></li>
+<li>register1<br>
+<img src="images/register-01.png" alt></li>
+<li>register2<br>
+<img src="images/register-02.png" alt></li>
+</ol>
+<h2 class="mume-header" id="22-%E7%95%8C%E9%9D%A2%E7%BB%84%E7%BB%87">2.2 &#x754C;&#x9762;&#x7EC4;&#x7EC7;</h2>
+
+<ol>
+<li>app-code<br>
+<img src="images/frame-01.png" alt></li>
+<li>main-system<br>
+<img src="images/frame-02.png" alt></li>
+<li>system-user<br>
+<img src="images/frame-03.png" alt></li>
+<li>system-authority<br>
+<img src="images/frame-04.png" alt></li>
+</ol>
+<h2 class="mume-header" id="23-%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E5%9D%97">2.3 &#x521B;&#x5EFA;&#x57FA;&#x672C;&#x5757;</h2>
+
+<ol>
+<li>&#x8FDB;&#x5165;&#x9879;&#x76EE;&#x76EE;&#x5F55;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students<span class="token operator">&gt;</span>d:      
+D:\students<span class="token operator">&gt;</span>cd \students\201621014321\jw2\workspace\webcore
+</pre></li>
+<li>&#x521B;&#x5EFA;forget&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component core/forget
+
+CREATE src/app/core/forget/forget.component.html <span class="token punctuation">(</span>25 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/forget/forget.component.spec.ts <span class="token punctuation">(</span>628 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/forget/forget.component.ts <span class="token punctuation">(</span>270 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/forget/forget.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/app.module.ts <span class="token punctuation">(</span>982 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;login&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component core/login
+
+CREATE src/app/core/login/login.component.html <span class="token punctuation">(</span>24 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/login/login.component.spec.ts <span class="token punctuation">(</span>621 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/login/login.component.ts <span class="token punctuation">(</span>266 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/login/login.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/app.module.ts <span class="token punctuation">(</span>1065 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;regist&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component core/regist
+
+CREATE src/app/core/regist/regist.component.html <span class="token punctuation">(</span>25 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/regist/regist.component.spec.ts <span class="token punctuation">(</span>628 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/regist/regist.component.ts <span class="token punctuation">(</span>270 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/regist/regist.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/app.module.ts <span class="token punctuation">(</span>1152 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;start&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component core/start
+
+CREATE src/app/core/start/start.component.html <span class="token punctuation">(</span>24 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/start/start.component.spec.ts <span class="token punctuation">(</span>621 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/start/start.component.ts <span class="token punctuation">(</span>266 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/start/start.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/app.module.ts <span class="token punctuation">(</span>1235 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;main&#x6A21;&#x5757;&#xFF0C;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x7684;&#x6839;&#x6A21;&#x5757;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g module main --routing
+
+CREATE src/app/main/main-routing.module.ts <span class="token punctuation">(</span>247 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/main.module.ts <span class="token punctuation">(</span>271 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;main&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main
+
+CREATE src/app/main/main.component.html <span class="token punctuation">(</span>23 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/main.component.spec.ts <span class="token punctuation">(</span>614 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/main.component.ts <span class="token punctuation">(</span>262 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/main.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/main.module.ts <span class="token punctuation">(</span>334 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;main&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> main\main
+
+CREATE src/app/main/main.service.spec.ts <span class="token punctuation">(</span>323 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/main.service.ts <span class="token punctuation">(</span>133 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;forget&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> core\services\forget
+
+CREATE src/app/core/services/forget.service.spec.ts <span class="token punctuation">(</span>333 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/services/forget.service.ts <span class="token punctuation">(</span>135 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;login&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> core\services\login
+
+CREATE src/app/core/services/login.service.spec.ts <span class="token punctuation">(</span>328 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/services/login.service.ts <span class="token punctuation">(</span>134 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;regist&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> core\services\regist
+
+CREATE src/app/core/services/regist.service.spec.ts <span class="token punctuation">(</span>333 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/services/regist.service.ts <span class="token punctuation">(</span>135 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;start&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> core\services\start
+
+CREATE src/app/core/services/start.service.spec.ts <span class="token punctuation">(</span>328 bytes<span class="token punctuation">)</span>
+CREATE src/app/core/services/start.service.ts <span class="token punctuation">(</span>134 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;system&#x6A21;&#x5757;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g module main/system --routing
+
+CREATE src/app/main/system/system-routing.module.ts <span class="token punctuation">(</span>249 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>279 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;system&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system
+
+CREATE src/app/main/system/system.component.html <span class="token punctuation">(</span>25 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/system.component.spec.ts <span class="token punctuation">(</span>628 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/system.component.ts <span class="token punctuation">(</span>270 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/system.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>348 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;user-main&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system/user-main
+
+CREATE src/app/main/system/user-main/user-main.component.html <span class="token punctuation">(</span>28 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-main/user-main.component.spec.ts <span class="token punctuation">(</span>643 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-main/user-main.component.ts <span class="token punctuation">(</span>281 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-main/user-main.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>436 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;user-role&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system/user-role
+
+CREATE src/app/main/system/user-role/user-role.component.html <span class="token punctuation">(</span>28 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-role/user-role.component.spec.ts <span class="token punctuation">(</span>643 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-role/user-role.component.ts <span class="token punctuation">(</span>281 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-role/user-role.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>524 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;user-profile&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system/user-profile
+
+CREATE src/app/main/system/user-profile/user-profile.component.html <span class="token punctuation">(</span>31 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-profile/user-profile.component.spec.ts <span class="token punctuation">(</span>664 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-profile/user-profile.component.ts <span class="token punctuation">(</span>293 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-profile/user-profile.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>624 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;user-password&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system/user-password
+
+CREATE src/app/main/system/user-password/user-password.component.html <span class="token punctuation">(</span>32 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-password/user-password.component.spec.ts <span class="token punctuation">(</span>671 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-password/user-password.component.ts <span class="token punctuation">(</span>297 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-password/user-password.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>728 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;user-add&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system/user-add
+
+CREATE src/app/main/system/user-add/user-add.component.html <span class="token punctuation">(</span>27 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-add/user-add.component.spec.ts <span class="token punctuation">(</span>636 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-add/user-add.component.ts <span class="token punctuation">(</span>277 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/user-add/user-add.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>812 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;auth-permission&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system/auth-permission
+
+CREATE src/app/main/system/auth-permission/auth-permission.component.html <span class="token punctuation">(</span>34 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-permission/auth-permission.component.spec.ts <span class="token punctuation">(</span>685 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-permission/auth-permission.component.ts <span class="token punctuation">(</span>305 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-permission/auth-permission.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>924 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;auth-role&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system/auth-role
+
+CREATE src/app/main/system/auth-role/auth-role.component.html <span class="token punctuation">(</span>28 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-role/auth-role.component.spec.ts <span class="token punctuation">(</span>643 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-role/auth-role.component.ts <span class="token punctuation">(</span>281 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-role/auth-role.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>1012 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;auth-main&#x7EC4;&#x4EF6;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g component main/system/auth-main
+
+CREATE src/app/main/system/auth-main/auth-main.component.html <span class="token punctuation">(</span>28 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-main/auth-main.component.spec.ts <span class="token punctuation">(</span>643 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-main/auth-main.component.ts <span class="token punctuation">(</span>281 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/auth-main/auth-main.component.scss <span class="token punctuation">(</span>0 bytes<span class="token punctuation">)</span>
+UPDATE src/app/main/system/system.module.ts <span class="token punctuation">(</span>1100 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;menu&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> main\system\services\menu
+
+CREATE src/app/main/system/services/menu.service.spec.ts <span class="token punctuation">(</span>323 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/services/menu.service.ts <span class="token punctuation">(</span>133 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;permission&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> main\system\services\permission
+
+CREATE src/app/main/system/services/permission.service.spec.ts <span class="token punctuation">(</span>353 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/services/permission.service.ts <span class="token punctuation">(</span>139 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;profile&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> main\system\services\profile
+
+CREATE src/app/main/system/services/profile.service.spec.ts <span class="token punctuation">(</span>338 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/services/profile.service.ts <span class="token punctuation">(</span>136 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;role&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> main\system\services\role
+
+CREATE src/app/main/system/services/role.service.spec.ts <span class="token punctuation">(</span>323 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/services/role.service.ts <span class="token punctuation">(</span>133 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x521B;&#x5EFA;user&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng g <span class="token function">service</span> main\system\services\user
+
+CREATE src/app/main/system/services/user.service.spec.ts <span class="token punctuation">(</span>323 bytes<span class="token punctuation">)</span>
+CREATE src/app/main/system/services/user.service.ts <span class="token punctuation">(</span>133 bytes<span class="token punctuation">)</span>
+</pre></li>
+<li>&#x5728;system&#x6A21;&#x5757;&#x4E0B;&#x521B;&#x5EFA;authority&#x548C;user&#x6587;&#x4EF6;&#x5939;<br>
+<img src="images/new-01.png" alt><br>
+<img src="images/new-02.png" alt><br>
+<img src="images/new-03.png" alt><br>
+<img src="images/new-04.png" alt><br>
+<img src="images/new-05.png" alt><br>
+<img src="images/new-07.png" alt></li>
+<li>&#x5C06;auth-main,auth-permission,auth-role&#x6A21;&#x5757;&#x4E0B;&#x7684;&#x5185;&#x5BB9;&#x79FB;&#x52A8;&#x5230;authority&#x6587;&#x4EF6;&#x5939;&#x4E0B;<br>
+<img src="images/new-06.png" alt></li>
+<li>&#x5C06;user-add,user-main,user-password,user-profile,user-role&#x6A21;&#x5757;&#x4E0B;&#x7684;&#x5185;&#x5BB9;&#x79FB;&#x52A8;&#x5230;user&#x6587;&#x4EF6;&#x5939;&#x4E0B;<br>
+<img src="images/new-08.png" alt></li>
+<li>&#x67E5;&#x770B;system.module.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">import</span> <span class="token punctuation">{</span> NgModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/core&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> CommonModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/common&apos;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> SystemRoutingModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./system-routing.module&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> SystemComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./system.component&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> UserMainComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./user/user-main.component&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> UserRoleComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./user/user-role.component&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> UserProfileComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./user/user-profile.component&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> UserPasswordComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./user/user-password.component&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> UserAddComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./user/user-add.component&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AuthPermissionComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./authority/auth-permission.component&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AuthRoleComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./authority/auth-role.component&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AuthMainComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;./authority/auth-main.component&apos;</span><span class="token punctuation">;</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  declarations<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    SystemComponent<span class="token punctuation">,</span> 
+    UserMainComponent<span class="token punctuation">,</span> 
+    UserRoleComponent<span class="token punctuation">,</span> 
+    UserProfileComponent<span class="token punctuation">,</span> 
+    UserPasswordComponent<span class="token punctuation">,</span> 
+    UserAddComponent<span class="token punctuation">,</span> 
+    AuthPermissionComponent<span class="token punctuation">,</span> 
+    AuthRoleComponent<span class="token punctuation">,</span> 
+    AuthMainComponent
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  imports<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    CommonModule<span class="token punctuation">,</span>
+    SystemRoutingModule
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">SystemModule</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x542F;&#x52A8;&#x670D;&#x52A1;<pre data-role="codeBlock" data-info="shell" class="language-shell">D:\students\201621014321\jw2\workspace\webcore<span class="token operator">&gt;</span>ng serve --open
+</pre></li>
+</ol>
+<h2 class="mume-header" id="24-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1">2.4 &#x9759;&#x6001;&#x8DEF;&#x7531;</h2>
+
+<ol>
+<li>app.module.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token operator">...</span> <span class="token operator">...</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ReactiveFormsModule<span class="token punctuation">,</span> FormsModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/forms&apos;</span><span class="token punctuation">;</span>
+<span class="token operator">...</span> <span class="token operator">...</span>
+imports<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span> <span class="token operator">...</span>
+  ReactiveFormsModule<span class="token punctuation">,</span>
+  <span class="token operator">...</span> <span class="token operator">...</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token operator">...</span> <span class="token operator">...</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>app-routing.module.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">const</span> routes<span class="token punctuation">:</span> Routes <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;start&apos;</span><span class="token punctuation">,</span>component<span class="token punctuation">:</span>StartComponent<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;login&apos;</span><span class="token punctuation">,</span>component<span class="token punctuation">:</span>LoginComponent<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;regist&apos;</span><span class="token punctuation">,</span>component<span class="token punctuation">:</span>RegistComponent<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;forget&apos;</span><span class="token punctuation">,</span>component<span class="token punctuation">:</span>ForgetComponent<span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;main&apos;</span><span class="token punctuation">,</span>loadChildren<span class="token punctuation">:</span><span class="token string">&apos;./main/main.module#MainModule&apos;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;**&apos;</span><span class="token punctuation">,</span>redirectTo<span class="token punctuation">:</span><span class="token string">&apos;start&apos;</span><span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>start.component.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-header</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">text-align</span><span class="token punctuation">:</span>right<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/forget<span class="token punctuation">&apos;</span> ]<span class="token punctuation">&quot;</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">padding</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token unit">px</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span><span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode">#fff</span><span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x627E;&#x5BC6;&#x7801;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/regist<span class="token punctuation">&apos;</span> ]<span class="token punctuation">&quot;</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">padding</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token unit">px</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span><span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode">#fff</span><span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x6CE8;&#x518C;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/login<span class="token punctuation">&apos;</span> ]<span class="token punctuation">&quot;</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">padding</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token unit">px</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span><span class="token property">color</span><span class="token punctuation">:</span><span class="token hexcode">#fff</span><span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x767B;&#x5F55;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-header</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><img src="images/static-01.png" alt></li>
+<li>login.component.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>login-form-forgot<span class="token punctuation">&quot;</span></span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/forget<span class="token punctuation">&apos;</span>]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x5BC6;&#x7801;&#x6211;&#x5FD8;&#x4E86;&#xFF01;&#x548B;&#x6574;&#xFF1F;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/main<span class="token punctuation">&apos;</span>]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">nz-button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>login-form-button<span class="token punctuation">&quot;</span></span> <span class="token attr-name">[nzType]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>primary<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Log in<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+Or
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/regist<span class="token punctuation">&apos;</span>]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x73B0;&#x5728;&#x5C31;&#x6CE8;&#x518C;&#xFF01;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+Or
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/start<span class="token punctuation">&apos;</span>]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x8FD4;&#x56DE;&#x9996;&#x9875;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><img src="images/static-02.png" alt></li>
+<li>regist.component.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/login<span class="token punctuation">&apos;</span> ]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">nz-button</span> <span class="token attr-name">nzType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>primary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x6CE8;&#x518C;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/start<span class="token punctuation">&apos;</span> ]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">nz-button</span> <span class="token attr-name">nzType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>default<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x8FD4;&#x56DE;&#x9996;&#x9875;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><img src="images/static-03.png" alt></li>
+<li>forget.component.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/login<span class="token punctuation">&apos;</span> ]<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">nz-button</span> <span class="token attr-name">nzType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>primary<span class="token punctuation">&quot;</span></span> <span class="token punctuation">&gt;</span></span>&#x627E;&#x56DE;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><img src="images/static-04.png" alt></li>
+</ol>
+<h2 class="mume-header" id="25-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1">2.5 &#x52A8;&#x6001;&#x8DEF;&#x7531;</h2>
+
+<ol>
+<li>&#x7528;&#x6237;&#x7BA1;&#x7406;&#x754C;&#x9762;&#x6784;&#x56FE;<br>
+<img src="images/dynamic-01.png" alt></li>
+<li>&#x6743;&#x9650;&#x7BA1;&#x7406;&#x754C;&#x9762;&#x6784;&#x56FE;<br>
+<img src="images/dynamic-02.png" alt></li>
+</ol>
+<h3 class="mume-header" id="251-main">2.5.1 main</h3>
+
+<ol>
+<li>main.module.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">import</span> <span class="token punctuation">{</span> NgZorroAntdModule<span class="token punctuation">,</span> <span class="token constant">NZ_I18N</span><span class="token punctuation">,</span> zh_CN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;ng-zorro-antd&apos;</span><span class="token punctuation">;</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  declarations<span class="token punctuation">:</span> <span class="token punctuation">[</span>MainComponent<span class="token punctuation">]</span><span class="token punctuation">,</span>
+  imports<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    NgZorroAntdModule
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  providers<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> provide<span class="token punctuation">:</span> <span class="token constant">NZ_I18N</span><span class="token punctuation">,</span> useValue<span class="token punctuation">:</span> zh_CN <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>main.component.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-header</span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">text-align</span><span class="token punctuation">:</span>right</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/main/system<span class="token punctuation">&apos;</span> ]<span class="token punctuation">&quot;</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">padding</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token unit">px</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span><span class="token property">color</span><span class="token punctuation">:</span><span class="token hexcode">#fff</span><span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">[routerLink]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>[ <span class="token punctuation">&apos;</span>/start<span class="token punctuation">&apos;</span> ]<span class="token punctuation">&quot;</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">padding</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token unit">px</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span><span class="token property">color</span><span class="token punctuation">:</span><span class="token hexcode">#fff</span><span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x8FD4;&#x56DE;&#x9996;&#x9875;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-header</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-outlet</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-outlet</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-footer</span><span class="token punctuation">&gt;</span></span>Footer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-footer</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>main-routing.module.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">const</span> routes<span class="token punctuation">:</span> Routes <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;&apos;</span><span class="token punctuation">,</span>component<span class="token punctuation">:</span>MainComponent
+    <span class="token punctuation">,</span>children<span class="token punctuation">:</span><span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;system&apos;</span><span class="token punctuation">,</span>loadChildren<span class="token punctuation">:</span><span class="token string">&apos;./system/system.module#SystemModule&apos;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;**&apos;</span><span class="token punctuation">,</span>redirectTo<span class="token punctuation">:</span><span class="token string">&apos;system&apos;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ol>
+<h3 class="mume-header" id="252-system">2.5.2 system</h3>
+
+<ol>
+<li>system.module.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">import</span> <span class="token punctuation">{</span> NgZorroAntdModule<span class="token punctuation">,</span> <span class="token constant">NZ_I18N</span><span class="token punctuation">,</span> zh_CN <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;ng-zorro-antd&apos;</span><span class="token punctuation">;</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  imports<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    NgZorroAntdModule
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  providers<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> provide<span class="token punctuation">:</span> <span class="token constant">NZ_I18N</span><span class="token punctuation">,</span> useValue<span class="token punctuation">:</span> zh_CN <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>system.component.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">import</span> <span class="token punctuation">{</span> Router <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/router&apos;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">SystemComponent</span> <span class="token keyword">implements</span> <span class="token class-name">OnInit</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> router<span class="token punctuation">:</span>Router</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+  <span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">menuClick</span><span class="token punctuation">(</span><span class="token parameter">url<span class="token punctuation">:</span><span class="token builtin">any</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>router<span class="token punctuation">.</span><span class="token function">navigateByUrl</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>system.component.scss<pre data-role="codeBlock" data-info="scss {.line-numbers}" class="language-scss line-numbers"><span class="token selector">nz-sider </span><span class="token punctuation">{</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">px</span><span class="token punctuation">;</span>
+    <span class="token property">min-width</span><span class="token punctuation">:</span> <span class="token number">40</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+    
+<span class="token selector">nz-content </span><span class="token punctuation">{</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token unit">px</span> <span class="token number">5</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+  
+<span class="token selector">nz-layout:last-child </span><span class="token punctuation">{</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+    
+<span class="token selector">.logo </span><span class="token punctuation">{</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> <span class="token number">32</span><span class="token unit">px</span><span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">32</span><span class="token unit">px</span><span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">12</span><span class="token unit">px</span> <span class="token number">12</span><span class="token unit">px</span> <span class="token number">0</span><span class="token unit">px</span><span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">rgba</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0.2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span>-webkit-flex<span class="token punctuation">;</span>
+  
+    <span class="token selector">.header</span><span class="token punctuation">{</span>
+        <span class="token property">width</span><span class="token punctuation">:</span><span class="token number">100</span><span class="token unit">%</span><span class="token punctuation">;</span>
+        <span class="token property">color</span><span class="token punctuation">:</span><span class="token hexcode">#fff</span><span class="token punctuation">;</span> 
+        <span class="token property">overflow</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span>
+        <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token unit">px</span> <span class="token number">10</span><span class="token unit">px</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>system.component.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+  
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-sider</span> <span class="token attr-name">nzCollapsible</span> <span class="token attr-name">[(nzCollapsed)]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isCollapsed<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>logo<span class="token punctuation">&quot;</span></span> <span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">title</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>header<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">nz-icon</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>solution<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">nz-menu</span> <span class="token attr-name">[nzTheme]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>dark<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">[nzMode]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>inline<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">[nzInlineCollapsed]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isCollapsed<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">nz-submenu</span> <span class="token attr-name">[nzOpen]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>true<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">title</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">nz-icon</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>user<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>nav-text<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x7528;&#x6237;&#x6743;&#x9650;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">nz-menu-item</span> <span class="token attr-name">(click)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>menuClick(<span class="token punctuation">&apos;</span>main/system/user<span class="token punctuation">&apos;</span>)<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x7528;&#x6237;&#x7BA1;&#x7406;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">nz-menu-item</span> <span class="token attr-name">(click)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>menuClick(<span class="token punctuation">&apos;</span>main/system/authority<span class="token punctuation">&apos;</span>)<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x6743;&#x9650;&#x7BA1;&#x7406;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-sider</span><span class="token punctuation">&gt;</span></span>
+  
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-outlet</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-outlet</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>system-routing.module.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">const</span> routes<span class="token punctuation">:</span> Routes <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span><span class="token string">&apos;&apos;</span><span class="token punctuation">,</span>component<span class="token punctuation">:</span>SystemComponent<span class="token punctuation">,</span>
+    children<span class="token punctuation">:</span><span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;user&apos;</span><span class="token punctuation">,</span>component<span class="token punctuation">:</span>UserMainComponent<span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;authority&apos;</span><span class="token punctuation">,</span>component<span class="token punctuation">:</span>AuthMainComponent<span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>path<span class="token punctuation">:</span><span class="token string">&apos;**&apos;</span><span class="token punctuation">,</span>redirectTo<span class="token punctuation">:</span><span class="token string">&apos;user&apos;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ol>
+<h3 class="mume-header" id="253-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86">2.5.3 &#x7528;&#x6237;&#x7BA1;&#x7406;</h3>
+
+<ol>
+<li>user-main.component.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">nz-row</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">nz-col</span> <span class="token attr-name">nzSpan</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>6<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>&#x7528;&#x6237;&#x5217;&#x8868;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">nz-col</span> <span class="token attr-name">nzSpan</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>18<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-input-group</span> <span class="token attr-name">[nzSuffix]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>suffixIconSearch<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text<span class="token punctuation">&quot;</span></span> <span class="token attr-name">nz-input</span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>input search text<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-input-group</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ng-template</span> <span class="token attr-name">#suffixIconSearch</span><span class="token punctuation">&gt;</span></span>
+                      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">nz-icon</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>search<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ng-template</span><span class="token punctuation">&gt;</span></span>                
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-table</span>
+          <span class="token attr-name">#dynamicTable</span>
+          <span class="token attr-name">[nzScroll]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>fixHeader ? { y: <span class="token punctuation">&apos;</span>240px<span class="token punctuation">&apos;</span> } : null<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzData]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>listOfData<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzBordered]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>bordered<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzSimple]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>simple<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzLoading]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>loading<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzPaginationPosition]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>position<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzShowSizeChanger]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>sizeChanger<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzFrontPagination]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>pagination<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzShowPagination]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>pagination<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzFooter]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>footer ? <span class="token punctuation">&apos;</span>Here is Footer<span class="token punctuation">&apos;</span> : null<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzTitle]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>title ? <span class="token punctuation">&apos;</span>Here is Title<span class="token punctuation">&apos;</span> : null<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzSize]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>size<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">(nzCurrentPageDataChange)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>currentPageDataChange($event)<span class="token punctuation">&quot;</span></span>
+        <span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>header<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>50px<span class="token punctuation">&quot;</span></span> <span class="token attr-name">nzShowExpand</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>expandable<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span>
+                <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>62px<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">nzShowCheckbox</span>
+                <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>checkbox<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">[(nzChecked)]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>allChecked<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">[nzIndeterminate]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>indeterminate<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">(nzCheckedChange)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>checkAll($event)<span class="token punctuation">&quot;</span></span>
+              <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>150px<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>70px<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Age<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">&gt;</span></span>Address<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>260px<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Action<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ng-template</span> <span class="token attr-name">ngFor</span> <span class="token attr-name">let-data</span> <span class="token attr-name">[ngForOf]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>dynamicTable.data<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">nzShowExpand</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>expandable<span class="token punctuation">&quot;</span></span> <span class="token attr-name">[(nzExpand)]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>data.expand<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">nzShowCheckbox</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>checkbox<span class="token punctuation">&quot;</span></span> <span class="token attr-name">[(nzChecked)]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>data.checked<span class="token punctuation">&quot;</span></span> <span class="token attr-name">(nzCheckedChange)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>refreshStatus()<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>{{ data.name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>{{ data.age }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>{{ data.address }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>#<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Action &#x4E00; {{ data.name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-divider</span> <span class="token attr-name">nzType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>vertical<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-divider</span><span class="token punctuation">&gt;</span></span>
+                  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>#<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Delete<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span> <span class="token attr-name">[nzExpand]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>data.expand &amp;&amp; expandable<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">[attr.colspan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>checkbox ? 5 : 4<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ data.description }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ng-template</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-table</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-sider</span> <span class="token attr-name">[nzWidth]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>500<span class="token punctuation">&quot;</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">background</span><span class="token punctuation">:</span>chocolate<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-tabset</span> <span class="token attr-name">[nzTabPosition]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>top<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">[nzType]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>card<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-tab</span>  <span class="token attr-name">[nzTitle]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>&#x65B0;&#x589E;&#x7528;&#x6237;<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> 
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-user-add</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-user-add</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-tab</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-tab</span>  <span class="token attr-name">[nzTitle]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> 
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-user-profile</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-user-profile</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-tab</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-tab</span>  <span class="token attr-name">[nzTitle]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>&#x89D2;&#x8272;&#x5206;&#x914D;<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> 
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-user-role</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-user-role</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-tab</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-tab</span>  <span class="token attr-name">[nzTitle]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>&#x91CD;&#x7F6E;&#x5BC6;&#x7801;<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> 
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-user-password</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-user-password</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-tab</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-tabset</span><span class="token punctuation">&gt;</span></span>
+      
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-sider</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>user-main.component.scss<pre data-role="codeBlock" data-info="scss {.line-numbers}" class="language-scss line-numbers"><span class="token selector">.components-table-demo-control-bar </span><span class="token punctuation">{</span>
+  <span class="token property">margin-bottom</span><span class="token punctuation">:</span> <span class="token number">12</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.nz-form-item </span><span class="token punctuation">{</span>
+  <span class="token property">margin-right</span><span class="token punctuation">:</span> <span class="token number">16</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">margin-bottom</span><span class="token punctuation">:</span> <span class="token number">8</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>user-main.component.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> OnInit <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/core&apos;</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token punctuation">:</span> <span class="token string">&apos;app-user-main&apos;</span><span class="token punctuation">,</span>
+  templateUrl<span class="token punctuation">:</span> <span class="token string">&apos;./user-main.component.html&apos;</span><span class="token punctuation">,</span>
+  styleUrls<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&apos;./user-main.component.scss&apos;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">UserMainComponent</span> <span class="token keyword">implements</span> <span class="token class-name">OnInit</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+  listOfData<span class="token punctuation">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  bordered <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  loading <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  sizeChanger <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  pagination <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  header <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  title <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  footer <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  fixHeader <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  size <span class="token operator">=</span> <span class="token string">&apos;small&apos;</span><span class="token punctuation">;</span>
+  expandable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  checkbox <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  allChecked <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  indeterminate <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  displayData<span class="token punctuation">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  simple <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  noResult <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  position <span class="token operator">=</span> <span class="token string">&apos;bottom&apos;</span><span class="token punctuation">;</span>
+
+  <span class="token function">currentPageDataChange</span><span class="token punctuation">(</span>
+    $event<span class="token punctuation">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
+      name<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+      age<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+      address<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+      checked<span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+      expand<span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+      description<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>displayData <span class="token operator">=</span> $event<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">refreshStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">refreshStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> validData <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>displayData<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> <span class="token operator">!</span>value<span class="token punctuation">.</span>disabled<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> allChecked <span class="token operator">=</span> validData<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> validData<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> value<span class="token punctuation">.</span>checked <span class="token operator">===</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> allUnChecked <span class="token operator">=</span> validData<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> <span class="token operator">!</span>value<span class="token punctuation">.</span>checked<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>allChecked <span class="token operator">=</span> allChecked<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>indeterminate <span class="token operator">=</span> <span class="token operator">!</span>allChecked <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>allUnChecked<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">checkAll</span><span class="token punctuation">(</span>value<span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>displayData<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">data</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>data<span class="token punctuation">.</span>disabled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        data<span class="token punctuation">.</span>checked <span class="token operator">=</span> value<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">refreshStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>listOfData<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">&apos;John Brown&apos;</span><span class="token punctuation">,</span>
+        age<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">2`</span></span><span class="token punctuation">,</span>
+        address<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`New York No. </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> Lake Park`</span></span><span class="token punctuation">,</span>
+        description<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`My name is John Brown, I am </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">2 years old, living in New York No. </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> Lake Park.`</span></span><span class="token punctuation">,</span>
+        checked<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        expand<span class="token punctuation">:</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ol>
+<h3 class="mume-header" id="254-%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86">2.5.4 &#x6743;&#x9650;&#x7BA1;&#x7406;</h3>
+
+<ol>
+<li>auth-main.component.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-sider</span> <span class="token attr-name">[nzWidth]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>400<span class="token punctuation">&quot;</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">background</span><span class="token punctuation">:</span>gainsboro<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-auth-role</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-auth-role</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-sider</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">nz-row</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">nz-col</span> <span class="token attr-name">nzSpan</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>col-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">nz-col</span> <span class="token attr-name">nzSpan</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>col-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">nz-col</span> <span class="token attr-name">nzSpan</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>col-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-table</span>
+    <span class="token attr-name">#dynamicTable</span>
+    <span class="token attr-name">[nzScroll]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>fixHeader ? { y: <span class="token punctuation">&apos;</span>240px<span class="token punctuation">&apos;</span> } : null<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzData]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>listOfData<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzBordered]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>bordered<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzSimple]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>simple<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzLoading]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>loading<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzPaginationPosition]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>position<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzShowSizeChanger]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>sizeChanger<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzFrontPagination]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>pagination<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzShowPagination]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>pagination<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzFooter]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>footer ? <span class="token punctuation">&apos;</span>Here is Footer<span class="token punctuation">&apos;</span> : null<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzTitle]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>title ? <span class="token punctuation">&apos;</span>Here is Title<span class="token punctuation">&apos;</span> : null<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">[nzSize]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>size<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">(nzCurrentPageDataChange)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>currentPageDataChange($event)<span class="token punctuation">&quot;</span></span>
+  <span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>thead</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>header<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>50px<span class="token punctuation">&quot;</span></span> <span class="token attr-name">nzShowExpand</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>expandable<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span>
+          <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>62px<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">nzShowCheckbox</span>
+          <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>checkbox<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[(nzChecked)]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>allChecked<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">[nzIndeterminate]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>indeterminate<span class="token punctuation">&quot;</span></span>
+          <span class="token attr-name">(nzCheckedChange)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>checkAll($event)<span class="token punctuation">&quot;</span></span>
+        <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>150px<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>70px<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Age<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span><span class="token punctuation">&gt;</span></span>Address<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>th</span> <span class="token attr-name">nzWidth</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>260px<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Action<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>th</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>thead</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tbody</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ng-template</span> <span class="token attr-name">ngFor</span> <span class="token attr-name">let-data</span> <span class="token attr-name">[ngForOf]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>dynamicTable.data<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">nzShowExpand</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>expandable<span class="token punctuation">&quot;</span></span> <span class="token attr-name">[(nzExpand)]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>data.expand<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">nzShowCheckbox</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>checkbox<span class="token punctuation">&quot;</span></span> <span class="token attr-name">[(nzChecked)]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>data.checked<span class="token punctuation">&quot;</span></span> <span class="token attr-name">(nzCheckedChange)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>refreshStatus()<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>{{ data.name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>{{ data.age }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>{{ data.address }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>#<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Action &#x4E00; {{ data.name }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-divider</span> <span class="token attr-name">nzType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>vertical<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-divider</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>#<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Delete<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span> <span class="token attr-name">[nzExpand]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>data.expand &amp;&amp; expandable<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span> <span class="token attr-name">[attr.colspan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>checkbox ? 5 : 4<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>{{ data.description }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ng-template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tbody</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-table</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span>
+  <span class="token attr-name">nz-form</span>
+  <span class="token attr-name">[nzLayout]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>validateForm.get(<span class="token punctuation">&apos;</span>formLayout<span class="token punctuation">&apos;</span>)?.value<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">[formGroup]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>validateForm<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">(ngSubmit)</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>submitForm()<span class="token punctuation">&quot;</span></span>
+<span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-label</span> <span class="token attr-name">[nzSpan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isHorizontal ? 4 : null<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Form Layout<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-label</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-control</span> <span class="token attr-name">[nzSpan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isHorizontal ? 14 : null<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-radio-group</span> <span class="token attr-name">formControlName</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>formLayout<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">nz-radio-button</span> <span class="token attr-name">[nzValue]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>horizontal<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Horizontal<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">nz-radio-button</span> <span class="token attr-name">[nzValue]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>vertical<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Vertical<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">nz-radio-button</span> <span class="token attr-name">[nzValue]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&apos;</span>inline<span class="token punctuation">&apos;</span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Inline<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-radio-group</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-control</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-label</span> <span class="token attr-name">[nzSpan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isHorizontal ? 4 : null<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Field A<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-label</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-control</span> <span class="token attr-name">[nzSpan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isHorizontal ? 14 : null<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">nz-input</span> <span class="token attr-name">formControlName</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>fieldA<span class="token punctuation">&quot;</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>input placeholder<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-explain</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>validateForm.get(<span class="token punctuation">&apos;</span>fieldA<span class="token punctuation">&apos;</span>)?.dirty &amp;&amp; validateForm.get(<span class="token punctuation">&apos;</span>fieldA<span class="token punctuation">&apos;</span>)?.errors<span class="token punctuation">&quot;</span></span>
+        <span class="token punctuation">&gt;</span></span>Please input your username!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-explain</span>
+      <span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-control</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-label</span> <span class="token attr-name">[nzSpan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isHorizontal ? 4 : null<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Field B<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-label</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-control</span> <span class="token attr-name">[nzSpan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isHorizontal ? 14 : null<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">nz-input</span> <span class="token attr-name">formControlName</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>filedB<span class="token punctuation">&quot;</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>input placeholder<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-explain</span> <span class="token attr-name">*ngIf</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>validateForm.get(<span class="token punctuation">&apos;</span>filedB<span class="token punctuation">&apos;</span>)?.dirty &amp;&amp; validateForm.get(<span class="token punctuation">&apos;</span>filedB<span class="token punctuation">&apos;</span>)?.errors<span class="token punctuation">&quot;</span></span>
+        <span class="token punctuation">&gt;</span></span>Please input your Password!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-explain</span>
+      <span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-control</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-form-control</span> <span class="token attr-name">[nzSpan]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isHorizontal ? 14 : null<span class="token punctuation">&quot;</span></span> <span class="token attr-name">[nzOffset]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>isHorizontal ? 4 : null<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">nz-button</span> <span class="token attr-name">nzType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>primary<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>Submit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-control</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-form-item</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-content</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nz-sider</span> <span class="token attr-name">[nzWidth]</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>400<span class="token punctuation">&quot;</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">=&quot;</span><span class="token attr-value"><span class="token property">background</span><span class="token punctuation">:</span>gainsboro<span class="token punctuation">;</span></span><span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>app-auth-permission</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>app-auth-permission</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-sider</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>nz-layout</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>auth-main.component.scss<pre data-role="codeBlock" data-info="scss {.line-numbers}" class="language-scss line-numbers"><span class="token selector">.components-table-demo-control-bar </span><span class="token punctuation">{</span>
+    <span class="token property">margin-bottom</span><span class="token punctuation">:</span> <span class="token number">12</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.nz-form-item </span><span class="token punctuation">{</span>
+  <span class="token property">margin-right</span><span class="token punctuation">:</span> <span class="token number">16</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token property">margin-bottom</span><span class="token punctuation">:</span> <span class="token number">8</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+[nz-form]<span class="token punctuation">:</span><span class="token function">not</span><span class="token punctuation">(</span><span class="token number">.</span>ant-form-inline<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token function">not</span><span class="token punctuation">(</span><span class="token number">.</span>ant-form-vertical<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">600</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>auth-main.component.ts<pre data-role="codeBlock" data-info="ts {.line-numbers}" class="language-ts line-numbers"><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> OnInit <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/core&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> FormBuilder<span class="token punctuation">,</span> FormGroup<span class="token punctuation">,</span> Validators <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@angular/forms&apos;</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token punctuation">:</span> <span class="token string">&apos;app-auth-main&apos;</span><span class="token punctuation">,</span>
+  templateUrl<span class="token punctuation">:</span> <span class="token string">&apos;./auth-main.component.html&apos;</span><span class="token punctuation">,</span>
+  styleUrls<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&apos;./auth-main.component.scss&apos;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AuthMainComponent</span> <span class="token keyword">implements</span> <span class="token class-name">OnInit</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> fb<span class="token punctuation">:</span> FormBuilder</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  listOfData<span class="token punctuation">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  bordered <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  loading <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  sizeChanger <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  pagination <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  header <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  title <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  footer <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  fixHeader <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  size <span class="token operator">=</span> <span class="token string">&apos;small&apos;</span><span class="token punctuation">;</span>
+  expandable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  checkbox <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  allChecked <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  indeterminate <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  displayData<span class="token punctuation">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  simple <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  noResult <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  position <span class="token operator">=</span> <span class="token string">&apos;bottom&apos;</span><span class="token punctuation">;</span>
+
+  <span class="token function">currentPageDataChange</span><span class="token punctuation">(</span>
+    $event<span class="token punctuation">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
+      name<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+      age<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+      address<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+      checked<span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+      expand<span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+      description<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>displayData <span class="token operator">=</span> $event<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">refreshStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">refreshStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> validData <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>displayData<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> <span class="token operator">!</span>value<span class="token punctuation">.</span>disabled<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> allChecked <span class="token operator">=</span> validData<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> validData<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> value<span class="token punctuation">.</span>checked <span class="token operator">===</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> allUnChecked <span class="token operator">=</span> validData<span class="token punctuation">.</span><span class="token function">every</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> <span class="token operator">!</span>value<span class="token punctuation">.</span>checked<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>allChecked <span class="token operator">=</span> allChecked<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>indeterminate <span class="token operator">=</span> <span class="token operator">!</span>allChecked <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>allUnChecked<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">checkAll</span><span class="token punctuation">(</span>value<span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>displayData<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">data</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>data<span class="token punctuation">.</span>disabled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        data<span class="token punctuation">.</span>checked <span class="token operator">=</span> value<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">refreshStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">100</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>listOfData<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">&apos;John Brown&apos;</span><span class="token punctuation">,</span>
+        age<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">2`</span></span><span class="token punctuation">,</span>
+        address<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`New York No. </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> Lake Park`</span></span><span class="token punctuation">,</span>
+        description<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`My name is John Brown, I am </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">2 years old, living in New York No. </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> Lake Park.`</span></span><span class="token punctuation">,</span>
+        checked<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        expand<span class="token punctuation">:</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>validateForm <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fb<span class="token punctuation">.</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      formLayout<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&apos;horizontal&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      fieldA<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>Validators<span class="token punctuation">.</span>required<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      filedB<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>Validators<span class="token punctuation">.</span>required<span class="token punctuation">]</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">}</span>
+
+  <span class="token function">noResultChange</span><span class="token punctuation">(</span>status<span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>listOfData <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  validateForm<span class="token punctuation">:</span> FormGroup<span class="token punctuation">;</span>
+
+  <span class="token function">submitForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> i <span class="token keyword">in</span> <span class="token keyword">this</span><span class="token punctuation">.</span>validateForm<span class="token punctuation">.</span>controls<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>validateForm<span class="token punctuation">.</span>controls<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">markAsDirty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>validateForm<span class="token punctuation">.</span>controls<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">updateValueAndValidity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">get</span> <span class="token function">isHorizontal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token builtin">boolean</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>validateForm<span class="token punctuation">.</span>controls<span class="token punctuation">.</span>formLayout <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>validateForm<span class="token punctuation">.</span>controls<span class="token punctuation">.</span>formLayout<span class="token punctuation">.</span>value <span class="token operator">===</span> <span class="token string">&apos;horizontal&apos;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ol>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#%E7%AC%AC2%E7%AB%A0-%E5%89%8D%E7%AB%AF%E8%AE%BE%E8%AE%A1">&#x7B2C;2&#x7AE0; &#x524D;&#x7AEF;&#x8BBE;&#x8BA1;</a>
+<ul>
+<li><a href="#21-%E6%95%B4%E4%BD%93%E9%A3%8E%E6%A0%BC%E8%AE%BE%E8%AE%A1">2.1 &#x6574;&#x4F53;&#x98CE;&#x683C;&#x8BBE;&#x8BA1;</a></li>
+<li><a href="#22-%E7%95%8C%E9%9D%A2%E7%BB%84%E7%BB%87">2.2 &#x754C;&#x9762;&#x7EC4;&#x7EC7;</a></li>
+<li><a href="#23-%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E5%9D%97">2.3 &#x521B;&#x5EFA;&#x57FA;&#x672C;&#x5757;</a></li>
+<li><a href="#24-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1">2.4 &#x9759;&#x6001;&#x8DEF;&#x7531;</a></li>
+<li><a href="#25-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1">2.5 &#x52A8;&#x6001;&#x8DEF;&#x7531;</a>
+<ul>
+<li><a href="#251-main">2.5.1 main</a></li>
+<li><a href="#252-system">2.5.2 system</a></li>
+<li><a href="#253-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86">2.5.3 &#x7528;&#x6237;&#x7BA1;&#x7406;</a></li>
+<li><a href="#254-%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86">2.5.4 &#x6743;&#x9650;&#x7BA1;&#x7406;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>
