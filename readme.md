@@ -13,6 +13,7 @@
     - 第08章 [后端API使用测试](2020/handout/08/back-test.html)
     - 第09章 [前端开发环境](2020/handout/09/front-env.html)
     - 第10章 [前端设计](2020/handout/10/front-design.html)
+    - 第11章 [用户管理功能实现](2020/handout/11/user.html)
 2. [软件工具](2020/tool/tool.html)
 3. 视频教程
     - [Angular7](2020/tutorial/angular7.html)
