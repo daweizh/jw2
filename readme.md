@@ -16,8 +16,8 @@
     - 第11章 [用户管理功能实现](2020/handout/11/user.html)
 2. [软件工具](2020/tool/tool.html)
 3. 视频教程
-    - [Angular7](2020/tutorial/angular7.html)
-    - [SprintBoot](2020/tutorial/springboot.html)
+    - [Angular7](tutorial/angular7.html)
+    - [SprintBoot](tutorial/springboot.html)
 
 
 <table style="border:0px;font-size:12px;">
