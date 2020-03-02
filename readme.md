@@ -3,7 +3,7 @@
 ## JavaWeb高级编程
 
 2. 课程讲义
-    - 第01章 [简介](2020/handout/01/intro.html)
+    - 第01章 [简介](2020/handout/01/intro.html)，√[视频演示](2020/handout/01/videos.html)
     - 第02章 [需求和分析](2020/handout/02/req-ana.html)
     - 第03章 [开发&运维服务器](2020/handout/03/server.html)
     - 第04章 [DevOps](2020/handout/04/devops.html)
