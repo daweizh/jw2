@@ -1,21 +1,23 @@
 辽宁师范大学 &bull; 张大为@[https://daweizh.github.io/jw2/](https://daweizh.github.io/jw2/)
 
 ## JavaWeb高级编程
-
-2. 课程讲义
-    - 第01章 [简介](2020/handout/01/intro.html)，√[视频演示](2020/handout/01/videos.html)
-    - 第02章 [需求和分析](2020/handout/02/req-ana.html)，√[视频演示](2020/handout/02/videos.html)
-    - 第03章 [开发&运维服务器](2020/handout/03/server.html)
-    - 第04章 [DevOps](2020/handout/04/devops.html)
-    - 第05章 [准备后端开发环境](2020/handout/05/back-env.html)
-    - 第06章 [后端设计](2020/handout/06/back-design.html)
-    - 第07章 [后端代码实现](2020/handout/07/back-implement.html)
-    - 第08章 [后端API使用测试](2020/handout/08/back-test.html)
-    - 第09章 [前端开发环境](2020/handout/09/front-env.html)
-    - 第10章 [前端设计](2020/handout/10/front-design.html)
-    - 第11章 [用户管理功能实现](2020/handout/11/user.html)
-2. [软件工具](2020/tool/tool.html)
-3. 视频教程
+1. 2020讲义&实战
+    - 第01章 [简介](2020/handout/01/intro.html)，&curren;[系统环境准备](2020/handout/01/doit.html)
+    - 第02章 [准备一台计算机](2020/handout/02/computer.html)，&curren;[部署服务器软件](2020/handout/02/doit.html)
+2. 2019讲义
+    - 第01章 [简介](2019/handout/01/intro.html)
+    - 第02章 [需求和分析](2019/handout/02/req-ana.html)
+    - 第03章 [开发&运维服务器](2019/handout/03/server.html)
+    - 第04章 [DevOps](2019/handout/04/devops.html)
+    - 第05章 [准备后端开发环境](2019/handout/05/back-env.html)
+    - 第06章 [后端设计](2019/handout/06/back-design.html)
+    - 第07章 [后端代码实现](2019/handout/07/back-implement.html)
+    - 第08章 [后端API使用测试](2019/handout/08/back-test.html)
+    - 第09章 [前端开发环境](2019/handout/09/front-env.html)
+    - 第10章 [前端设计](2019/handout/10/front-design.html)
+    - 第11章 [用户管理功能实现](2019/handout/11/user.html)
+3. [软件工具](tool/tool.html)
+4. 视频教程
     - [Angular7](tutorial/angular7.html)
     - [SprintBoot](tutorial/springboot.html)
 
