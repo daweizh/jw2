@@ -3,7 +3,7 @@
 ## JavaWeb高级编程
 1. 2020讲义&实战
     - 第01章 ![](assets/me/img/handout16.png)[简介](2020/01/intro.html)，![](assets/me/img/video16.png)[系统环境准备](2020/01/doit.html)
-    - 第02章 ![](assets/me/img/handout32.png)[准备一台计算机](2020/02/computer.html)，![](assets/me/img/video32.png)[部署服务器软件](2020/02/doit.html)
+    - 第02章 ![](assets/me/img/handout16.png)[准备一台计算机](2020/02/computer.html)，![](assets/me/img/video16.png)[部署服务器软件](2020/02/doit.html)
 2. 2019讲义
     - 第01章 [简介](2019/handout/01/intro.html)
     - 第02章 [需求和分析](2019/handout/02/req-ana.html)
