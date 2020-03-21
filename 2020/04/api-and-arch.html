@@ -1,0 +1,1334 @@
+<!DOCTYPE html><html><head>
+      <title>api-and-arch</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+      
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+      <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66519574" charset="UTF-8"></script>      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="%E7%AC%AC04%E7%AB%A0-%E5%90%8E%E7%AB%AF%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1">&#x7B2C;04&#x7AE0; &#x540E;&#x7AEF;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;</h1>
+
+<p>&#x8FBD;&#x5B81;&#x5E08;&#x8303;&#x5927;&#x5B66; &#x2022; &#x5F20;&#x5927;&#x4E3A;@<a href="https://daweizh.github.io/jw2">https://daweizh.github.io/jw2/</a></p>
+<p>&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x540E;&#x7AEF;&#x903B;&#x8F91;&#x7EC4;&#x7EC7;&#x5411;&#x524D;&#x7AEF;&#x5448;&#x73B0;&#xFF0C;&#x524D;&#x7AEF;&#x63D0;&#x4EA4;&#x7684;&#x6570;&#x636E;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x540E;&#x7AEF;&#x903B;&#x8F91;&#x5411;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5199;&#x5165;&#x3002;&#x540E;&#x7AEF;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x901A;&#x8FC7;RESTful&#x98CE;&#x683C;&#x7684;API&#x5F62;&#x5F0F;&#x5411;&#x524D;&#x7AEF;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x3002;&#x524D;&#x540E;&#x7AEF;&#x4EA4;&#x4E92;&#x6570;&#x636E;&#x7684;&#x683C;&#x5F0F;&#x91C7;&#x7528;JSON&#x5F62;&#x5F0F;&#x3002;</p>
+<p>&#x5173;&#x4E8E;RESTful API&#x8BBE;&#x8BA1;&#x89C4;&#x8303;&#x8BF7;&#x53C2;&#x8003;&#xFF1A;</p>
+<ol>
+<li>&#x6D45;&#x6DE1;RESTful api&#x8BBE;&#x8BA1;&#x89C4;&#x8303;&#xFF0C;<a href="https://www.jianshu.com/p/9bb7e6c683a3">https://www.jianshu.com/p/9bb7e6c683a3</a></li>
+<li>RESTful API &#x8BBE;&#x8BA1;&#x6307;&#x5357;&#xFF0C;<a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></li>
+</ol>
+<p>&#x5173;&#x4E8E;JSON&#x6570;&#x636E;&#x683C;&#x5F0F;&#x8BF7;&#x53C2;&#x8003;&#xFF1A;</p>
+<ol>
+<li>JSON&#x5B98;&#x7F51;&#xFF0C;<a href="http://www.json.org/json-zh.html">http://www.json.org/json-zh.html</a></li>
+<li>json.cn&#xFF0C;<a href="https://www.json.cn/">https://www.json.cn/</a></li>
+</ol>
+<p>&#x4EE5;&#x4E0B;&#x9488;&#x5BF9;AMC&#x9879;&#x76EE;&#x57FA;&#x672C;&#x6570;&#x636E;&#x8868;&#x7684;API&#x8FDB;&#x884C;&#x521D;&#x6B65;&#x8BBE;&#x8BA1;&#x3002;</p>
+<h2 class="mume-header" id="41-amcuser">4.1 amc.user</h2>
+
+<h3 class="mume-header" id="411-amcapiuser">4.1.1 /amc/api/user</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x63A5;&#x53E3;&#x8BF4;&#x660E;</li>
+</ul>
+<h2 class="mume-header" id="412-amcapiuserlist">4.1.2 /amc/api/user/list</h2>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x8FD4;&#x56DE;&#x7528;&#x6237;&#x5217;&#x8868;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;PageOptions page<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;loading&quot;</span><span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageIndex&quot;</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageSize&quot;</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span><span class="token number">26</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortName&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortValue&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;ListResult&lt;User&gt;<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;username&quot;</span><span class="token operator">:</span> <span class="token string">&quot;201621010211&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;password&quot;</span><span class="token operator">:</span> <span class="token string">&quot;167882&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x953A;&#x971E;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;u.oddrwxoks@semnk.cn&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;phone&quot;</span><span class="token operator">:</span> <span class="token string">&quot;13910256755&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;5945&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;secret&quot;</span><span class="token operator">:</span> <span class="token string">&quot;340c44c2-cab1-40ad-ba62-17a32bbbc63a&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-13 16:14:56&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;username&quot;</span><span class="token operator">:</span> <span class="token string">&quot;201621010230&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;password&quot;</span><span class="token operator">:</span> <span class="token string">&quot;502737&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x80E1;&#x6D9B;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;s.lslid@ouijboz.tv&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;phone&quot;</span><span class="token operator">:</span> <span class="token string">&quot;13911851562&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;8116&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;secret&quot;</span><span class="token operator">:</span> <span class="token string">&quot;616d72d1-6545-479d-8ea8-f636ae054661&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-13 16:16:01&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;index&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span> <span class="token number">921</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="413-amcapiuserinsert">4.1.3 /amc/api/user/insert</h2>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x65B0;&#x589E;&#x7528;&#x6237;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;User user<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;username&quot;</span><span class="token operator">:</span><span class="token number">201621010001</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;password&quot;</span><span class="token operator">:</span><span class="token string">&quot;123456&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x5F20;&#x4E09;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;email&quot;</span><span class="token operator">:</span><span class="token string">&quot;abc@abc.com&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;phone&quot;</span><span class="token operator">:</span><span class="token string">&quot;12433336666&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span><span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;secret&quot;</span><span class="token operator">:</span><span class="token string">&quot;secret&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/user/insert&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="414-amcapiuserdelete">4.1.4 /amc/api/user/delete</h2>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x5220;&#x9664;&#x7528;&#x6237;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token number">201621010001</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/user/delete&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="415-amcapiuserupdate">4.1.5 /amc/api/user/update</h2>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x66F4;&#x65B0;&#x7528;&#x6237;</li>
+<li>&#x53C2;&#x6570;&#xFF1A; User user<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;username&quot;</span><span class="token operator">:</span><span class="token number">201621010001</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;password&quot;</span><span class="token operator">:</span><span class="token string">&quot;654321&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x674E;&#x56DB;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;email&quot;</span><span class="token operator">:</span><span class="token string">&quot;abc@abc.com&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;phone&quot;</span><span class="token operator">:</span><span class="token string">&quot;12433336666&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span><span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;secret&quot;</span><span class="token operator">:</span><span class="token string">&quot;secret&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/user/update&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="416-amcapiuserfind">4.1.6 /amc/api/user/find</h2>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x5173;&#x952E;&#x5B57;&#x67E5;&#x627E;&#x5E76;&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x674E; abc&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;User<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;username&quot;</span><span class="token operator">:</span> <span class="token string">&quot;201621010001&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;password&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123456&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x674E;&#x56DB;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;abc@abc.com&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;phone&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12433336666&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;secret&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-08-22 15:38:18&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="417-amcapiuserget">4.1.7 /amc/api/user/get</h2>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x7528;&#x6237;ID&#x67E5;&#x627E;&#x5E76;&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token number">201621010001</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;User<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;username&quot;</span><span class="token operator">:</span> <span class="token string">&quot;201621010001&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;password&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123456&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x674E;&#x56DB;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;email&quot;</span><span class="token operator">:</span> <span class="token string">&quot;abc@abc.com&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;phone&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12433336666&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;secret&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-08-22 15:38:18&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="42-amcrole">4.2 amc.role</h2>
+
+<h3 class="mume-header" id="421-amcapirole">4.2.1 /amc/api/role</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x63A5;&#x53E3;&#x8BF4;&#x660E;</li>
+</ul>
+<h3 class="mume-header" id="422-amcapirolelist">4.2.2 /amc/api/role/list</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x89D2;&#x8272;&#x5217;&#x8868;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;PageOptions page<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;loading&quot;</span><span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageIndex&quot;</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageSize&quot;</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span><span class="token number">26</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortName&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortValue&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;ListResult&lt;Role&gt;<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0026&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6C11;&#x5206;&#x9009;&#x6BD4;&#x4F5C;&#x7A7A;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x4F59;&#x52C7;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x63A5;&#x611F;&#x7F8E;&#x65AF;&#x6BDB;&#x515A;&#x9002;&#x4F8B;&#x5408;&#x91CD;&#x5C40;&#x7ECF;&#x8BC1;&#x8BA1;&#x4F20;&#x3002;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2002-03-10 16:20:52&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0058&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5F53;&#x7740;&#x7A7A;&#x540C;&#x70B9;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x53F2;&#x6D9B;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5236;&#x9769;&#x751F;&#x5668;&#x5316;&#x5FEB;&#x6BDB;&#x5F88;&#x5FC3;&#x7279;&#x6743;&#x5316;&#x7EC6;&#x6559;&#x542C;&#x65CF;&#x65E5;&#x5B66;&#x3002;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2008-05-07 05:39:43&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;index&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span> <span class="token number">946</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="423-amcapiroleinsert">4.2.3 /amc/api/role/insert</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x65B0;&#x589E;&#x89D2;&#x8272;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;Role role<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;123456&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span><span class="token string">&quot;6-5-4-3-2-1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;123456&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;note&quot;</span><span class="token operator">:</span><span class="token string">&quot;slakdjfasldfjaslkdf&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/role/insert&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="424-amcapiroledelete">4.2.4 /amc/api/role/delete</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x5220;&#x9664;&#x89D2;&#x8272;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;0026&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/role/delete&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="425-amcapiroleupdate">4.2.5 /amc/api/role/update</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x66F4;&#x65B0;&#x89D2;&#x8272;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;Role role<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;0155&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span><span class="token string">&quot;6-5-4-3-2-1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;123456&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;note&quot;</span><span class="token operator">:</span><span class="token string">&quot;slakdjfasldfjaslkdf&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/role/update&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="426-amcapirolefind">4.2.6 /amc/api/role/find</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x5173;&#x952E;&#x5B57;&#x67E5;&#x627E;&#x5E76;&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x89D2;&#x8272;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;2 &#x4E86; 1994&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Role<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0201&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x90E8;&#x5DF1;&#x5343;&#x8DEF;&#x9645;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x718A;&#x8273;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B50;&#x52A8;&#x4E86;&#x5199;&#x7A76;&#x6B21;&#x8272;&#x517B;&#x7ACB;&#x4FE1;&#x4E5F;&#x597D;&#x5979;&#x5B66;&#x6CB9;&#x7A7A;&#x3002;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1994-11-03 21:40:11&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="427-amcapiroleget">4.2.7 /amc/api/role/get</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x89D2;&#x8272;ID&#x67E5;&#x627E;&#x5E76;&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;0201&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Role<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0201&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x90E8;&#x5DF1;&#x5343;&#x8DEF;&#x9645;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x718A;&#x8273;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B50;&#x52A8;&#x4E86;&#x5199;&#x7A76;&#x6B21;&#x8272;&#x517B;&#x7ACB;&#x4FE1;&#x4E5F;&#x597D;&#x5979;&#x5B66;&#x6CB9;&#x7A7A;&#x3002;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1994-11-03 21:40:11&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="428-amcapirolegets">4.2.8 /amc/api/role/gets</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x591A;&#x4E2A;&#x89D2;&#x8272;ID&#x8FD4;&#x56DE;0&#x6216;n&#x6761;&#x89D2;&#x8272;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;ids&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0301:0302:0303:0304:0305:0306:0307:0308&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;List&lt;Role&gt;<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0301&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;editor&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7F16;&#x8F91;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7F16;&#x8F91;&#x56FE;&#x6587;&#x8D44;&#x6E90;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-19 14:14:47&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0302&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;review&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5BA1;&#x9605;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8BC4;&#x5BA1;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-19 14:17:32&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0303&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;publish&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x53D1;&#x8868;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7F16;&#x8F91;&#x680F;&#x76EE;&#xFF0C;&#x53D1;&#x8868;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-19 14:17:22&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0304&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-19 14:19:07&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0305&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6570;&#x636E;&#x7EDF;&#x8BA1;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6570;&#x636E;&#x7EDF;&#x8BA1;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6570;&#x636E;&#x7EDF;&#x8BA1;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-19 14:19:20&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0306&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8F85;&#x5BFC;&#x5458;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8F85;&#x5BFC;&#x5458;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8F85;&#x5BFC;&#x5458;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-19 14:19:53&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0307&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B66;&#x9662;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B66;&#x9662;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B66;&#x9662;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-19 14:19:55&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0308&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B66;&#x751F;&#x5904;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B66;&#x751F;&#x5904;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B66;&#x751F;&#x5904;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-19 14:20:10&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="429-amcapirolekeys">4.2.9 /amc/api/role/keys</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x8FD4;&#x56DE;&#x7528;&#x4E8E;&#x89D2;&#x8272;&#x5217;&#x8868;&#x7684;&#x952E;&#x503C;&#x5BF9;</li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;List&lt;KeyValue&gt;<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0000&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;super / &#x8D85;&#x7EA7;&#x7528;&#x6237;&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0001&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;admin / &#x7CFB;&#x7EDF;&#x7BA1;&#x7406;&#x5458;&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0155&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;6-5-4-3-2-1 / 123456&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0201&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x90E8;&#x5DF1;&#x5343;&#x8DEF;&#x9645; / &#x718A;&#x8273;&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0300&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;maga / maga&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0301&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token string">&quot;editor / &#x7F16;&#x8F91;&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="43-amcmenu">4.3  amc.menu</h2>
+
+<h3 class="mume-header" id="431-amcapimenu">4.3.1 /amc/api/menu</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x63A5;&#x53E3;&#x8BF4;&#x660E;</li>
+</ul>
+<h3 class="mume-header" id="432-amcapimenulist">4.3.2 /amc/api/menu/list</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x8FD4;&#x56DE;&#x83DC;&#x5355;&#x5217;&#x8868;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;PageOptions page<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span> 
+  <span class="token property">&quot;loading&quot;</span><span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageIndex&quot;</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageSize&quot;</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span><span class="token number">26</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortName&quot;</span><span class="token operator">:</span><span class="token null">null</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortValue&quot;</span><span class="token operator">:</span><span class="token null">null</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token null">null</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;ListResult&lt;MenuListTree&gt;<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;137&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;data&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6570;&#x636E;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6570;&#x636E;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ws://ilxhtord.gov.cn/ktsw&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:16:58&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;267&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;data:view&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5B54;&#x971E;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x9636;&#x8BB8;&#x7740;&#x53C2;&#x5357;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ws://lcbqjsyjs.cn/tuerxojj&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:18:24&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;268&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;data:detail&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x94B1;&#x521A;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x767E;&#x51B3;&#x6216;&#x5DF1;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://zbuxswyes.tw/wkqjlg&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:18:33&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;269&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;test&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;269&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;test:test&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6D4B;&#x8BD5;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6D4B;&#x8BD5;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-23 13:09:37&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;117&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;admin&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://qwcda.net.cn/ifluiha&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:16:37&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;147&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;admin:authority&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6743;&#x9650;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6743;&#x9650;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ws://yturhvr.tv/mpmbwstmlp&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:20:51&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;143&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;admin:account&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8D26;&#x6237;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8D26;&#x6237;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;wss://pnrjk.com/tzfvy&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:20:36&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;127&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;maga&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x91C7;&#x7F16;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x91C7;&#x7F16;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://ewkjdlxw.gov.cn/zkmuqmilgp&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:16:49&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;251&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;maga:publis&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x4F59;&#x6D9B;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5F00;&#x513F;&#x90FD;&#x6C14;&#x8BAE;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;wss://anr.tw/gzv&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:18:10&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;167&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;maga:edit&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7A3F;&#x4EF6;&#x7F16;&#x8F91;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7A3F;&#x4EF6;&#x7F16;&#x8F91;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;wss://hziwrfwsn.net.cn/vhuupnf&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:25:36&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;233&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;maga:review&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x82CF;&#x5A1F;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x515A;&#x53D1;&#x5199;&#x5173;&#x571F;&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://vzsqri.tv/uus&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:18:04&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;index&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span> <span class="token number">11</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="433-amcapimenuinsert">4.3.3 /amc/api/menu/insert</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A; &#x65B0;&#x589E;&#x83DC;&#x5355;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;Menu menu<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span><span class="token string">&quot;test:test1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x6D4B;&#x8BD5;1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;title&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x6D4B;&#x8BD5;1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;url&quot;</span><span class="token operator">:</span><span class="token string">&quot;http://localhost:8080&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;type&quot;</span><span class="token operator">:</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A; Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/menu/insert&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="434-amcapimenudelete">4.3.4 /amc/api/menu/delete</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x5220;&#x9664;&#x83DC;&#x5355;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;9997&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A; Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/menu/delete&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="435-amcapimenuupdate">4.3.5 /amc/api/menu/update</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x66F4;&#x65B0;&#x83DC;&#x5355;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;Menu menu<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token number">9999</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span><span class="token string">&quot;test:test2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x6D4B;&#x8BD5;2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;title&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x6D4B;&#x8BD5;2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;url&quot;</span><span class="token operator">:</span><span class="token string">&quot;http://localhost:8080/2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;type&quot;</span><span class="token operator">:</span><span class="token number">2</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A; Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/menu/update&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="436-amcapimenufind">4.3.6 /amc/api/menu/find</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x5173;&#x952E;&#x5B57;&#x67E5;&#x627E;&#x5E76;&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x83DC;&#x5355;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;http &#x7BA1;&#x7406;&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A; Menu<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;117&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;admin&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7BA1;&#x7406;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://qwcda.net.cn/ifluiha&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-22 14:16:37&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="437-amcapimenuget">4.3.7 /amc/api/menu/get</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x83DC;&#x5355;ID&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;9999&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A; Menu<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;9999&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;test:test2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6D4B;&#x8BD5;2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6D4B;&#x8BD5;2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;http://localhost:8080/2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-08-22 11:13:09&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="438-amcapimenutree">4.3.8 /amc/api/menu/tree</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x53C2;&#x6570;&#x7EC4;&#x5408;&#x67E5;&#x627E;&#x5E76;&#x8FD4;&#x56DE;&#x83DC;&#x5355;&#x6811;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;root&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;depth&quot;</span><span class="token operator">:</span><span class="token number">0</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8BF4;&#x660E;&#xFF1A;
+<ul>
+<li>root=&quot;&quot; &#x4ECE;&#x7EDD;&#x5BF9;&#x5F00;&#x59CB;&#x8FD4;&#x56DE;&#x83DC;&#x5355;</li>
+<li>root=&quot;menu&quot; &#x4ECE;menu&#x5F00;&#x59CB;&#xFF0C;&#x5305;&#x62EC;menu</li>
+<li>root=&quot;menu:&quot; &#x4ECE;menu&#x5F00;&#x59CB;&#xFF0C;&#x4E0D;&#x5305;&#x62EC;menu</li>
+<li>depth=0 &#x6DF1;&#x5EA6;&#x6CA1;&#x6709;&#x9650;&#x5236;</li>
+<li>depth=n &#x4ECE;root&#x5F00;&#x59CB;&#x6DF1;&#x5EA6;&#x4E3A;n&#x7684;&#x83DC;&#x5355;</li>
+</ul>
+</li>
+<li>&#x8FD4;&#x56DE;&#xFF1A; List&lt;MenuListTree&gt;<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;273&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;portal:course:north&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5317;&#x9662;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5317;&#x9662;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;icon&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-05 13:57:03&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;275&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;portal:course:west&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x897F;&#x5C71;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x897F;&#x5C71;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;icon&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-05 13:57:04&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;274&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;portal:course:sourth&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5357;&#x9662;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5357;&#x9662;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;icon&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-09-05 13:57:04&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;children&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="44-amcpermission">4.4  amc.permission</h2>
+
+<h3 class="mume-header" id="441-amcapipermission">4.4.1 /amc/api/permission</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x63A5;&#x53E3;&#x8BF4;&#x660E;</li>
+</ul>
+<h3 class="mume-header" id="442-amcapipermissionlist">4.4.2 /amc/api/permission/list</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x89D2;&#x8272;&#x83DC;&#x5355;&#x6743;&#x9650;&#x5217;&#x8868;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;PageOptions page<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;loading&quot;</span><span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageIndex&quot;</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageSize&quot;</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span><span class="token number">26</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortName&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortValue&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;ListResult&lt;Permission&gt;<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;28&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;kr&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;enable&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1982-07-23 18:25:28&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;31&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;5&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;hklfg&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;enable&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2013-07-24 01:26:32&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;index&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span> <span class="token number">791</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="443-amcapipermissioninsert">4.4.3 /amc/api/permission/insert</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x65B0;&#x589E;&#x6743;&#x9650;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;Permission permission<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span><span class="token number">123456</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span><span class="token number">654321</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;enable&quot;</span><span class="token operator">:</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/permission/insert&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="444-amcapipermissiondelete">4.4.4 /amc/api/permission/delete</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x5220;&#x9664;&#x6743;&#x9650;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token number">9989</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/permission/delete&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="445-amcapipermissionupdate">4.4.5 /amc/api/permission/update</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x66F4;&#x65B0;&#x6743;&#x9650;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;Permission permission<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token number">9988</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span><span class="token number">123456</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span><span class="token string">&quot;6-5-4-3-2-1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;enable&quot;</span><span class="token operator">:</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/permission/update&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="446-amcapipermissionfind">4.4.6 /amc/api/permission/find</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x5173;&#x952E;&#x5B57;&#x67E5;&#x627E;&#x5E76;&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x6743;&#x9650;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;m 1972&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Permission<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1886&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;mqf&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;enable&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1972-05-20 02:39:20&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="447-amcapipermissionget">4.4.7 /amc/api/permission/get</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;ID&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x6743;&#x9650;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token number">9988</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Permission<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;9988&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;menu&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123456&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;6-5-4-3-2-1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;enable&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-08-28 09:26:18&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="45-amcprofile">4.5 amc.profile</h2>
+
+<h3 class="mume-header" id="451-amcapiprofile">4.5.1 /amc/api/profile</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x63A5;&#x53E3;&#x8BF4;&#x660E;</li>
+</ul>
+<h3 class="mume-header" id="452-amcapiprofilelist">4.5.2 /amc/api/profile/list</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x8FD4;&#x56DE;&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;&#x5217;&#x8868;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;PageOptions page<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;loading&quot;</span><span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageIndex&quot;</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;pageSize&quot;</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span><span class="token number">26</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortName&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sortValue&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;ListResult&lt;Profile&gt;<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;201621010211&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;photo&quot;</span><span class="token operator">:</span> <span class="token string">&quot;repos/asset/image/avatar1/1.jpg&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;sex&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5973;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;birthday&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1982-02-20&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;province&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5357;&#x4EAC;&#x5E02;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x63A5;&#x9762;&#x6253;&#x4E13;&#x5FC3;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;education&quot;</span><span class="token operator">:</span> <span class="token string">&quot;undefined&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;degree&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x662F;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;department&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x9F99;&#x8BF4;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;major&quot;</span><span class="token operator">:</span> <span class="token string">&quot;6&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;grade&quot;</span><span class="token operator">:</span> <span class="token string">&quot;23&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;clazz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;8&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x538B;&#x571F;&#x5F80;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-29 08:34:52&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;201621010230&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;photo&quot;</span><span class="token operator">:</span> <span class="token string">&quot;repos/asset/image/avatar1/2.jpg&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;sex&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5973;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;birthday&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2006-01-31&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;province&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x4E0A;&#x6D77;&#x5E02;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x91CF;&#x5386;&#x5927;&#x6B64;&#x66F4;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;education&quot;</span><span class="token operator">:</span> <span class="token string">&quot;undefined&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;degree&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5426;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;department&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x8BAE;&#x51FA;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;major&quot;</span><span class="token operator">:</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;grade&quot;</span><span class="token operator">:</span> <span class="token string">&quot;74&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;clazz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;6&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6539;&#x601D;&#x5C5E;&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-29 14:07:19&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;index&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;total&quot;</span><span class="token operator">:</span> <span class="token number">920</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="453-amcapiprofileinsert">4.5.3 /amc/api/profile/insert</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x65B0;&#x589E;&#x4E00;&#x6761;&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;Profile profile<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token number">201621010001</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;photo&quot;</span><span class="token operator">:</span><span class="token string">&quot;===&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sex&quot;</span><span class="token operator">:</span><span class="token string">&quot;==&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;birthday&quot;</span><span class="token operator">:</span><span class="token string">&quot;2019-08-29&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;province&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x5927;&#x8FDE;&#x5E02;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;title&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x8FBD;&#x5B81;&#x5E08;&#x8303;&#x5927;&#x5B66;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;education&quot;</span><span class="token operator">:</span><span class="token string">&quot;university&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;degree&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x5B66;&#x58EB;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;department&quot;</span><span class="token operator">:</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;major&quot;</span><span class="token operator">:</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;grade&quot;</span><span class="token operator">:</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;clazz&quot;</span><span class="token operator">:</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;note&quot;</span><span class="token operator">:</span><span class="token string">&quot;========&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/profile/insert&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="454-amcapiprofiledelete">4.5.4 /amc/api/profile/delete</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x5220;&#x9664;&#x4E00;&#x6761;&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;201621010001&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/profile/delete&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="455-amcapiprofileupdate">4.5.5 /amc/api/profile/update</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x66F4;&#x65B0;&#x4E00;&#x6761;&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;Profile profile<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;201621010211&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;photo&quot;</span><span class="token operator">:</span><span class="token string">&quot;===&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sex&quot;</span><span class="token operator">:</span><span class="token string">&quot;==&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;birthday&quot;</span><span class="token operator">:</span><span class="token string">&quot;2019-08-29&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;province&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x5927;&#x8FDE;&#x5E02;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;title&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x8FBD;&#x5B81;&#x5E08;&#x8303;&#x5927;&#x5B66;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;education&quot;</span><span class="token operator">:</span><span class="token string">&quot;university&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;degree&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x5B66;&#x58EB;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;department&quot;</span><span class="token operator">:</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;major&quot;</span><span class="token operator">:</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;grade&quot;</span><span class="token operator">:</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;clazz&quot;</span><span class="token operator">:</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;note&quot;</span><span class="token operator">:</span><span class="token string">&quot;========&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Message<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;status&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/amc/api/profile/update&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="456-amcapiprofilefind">4.5.6 /amc/api/profile/find</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;&#x5173;&#x952E;&#x5B57;&#x67E5;&#x627E;&#x5E76;&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span><span class="token string">&quot;&#x5973; 284 29&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Profile<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;201621010284&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;photo&quot;</span><span class="token operator">:</span> <span class="token string">&quot;repos/asset/image/avatar1/5.jpg&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sex&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5973;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;birthday&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1986-09-04&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;province&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x91CD;&#x5E86;&#x5E02;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x65AD;&#x65F6;&#x5343;&#x9769;&#x8FD9;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;education&quot;</span><span class="token operator">:</span> <span class="token string">&quot;undefined&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;degree&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x662F;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;department&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x6253;&#x6DF1;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;major&quot;</span><span class="token operator">:</span> <span class="token string">&quot;7&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;grade&quot;</span><span class="token operator">:</span> <span class="token string">&quot;49&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;clazz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x738B;&#x65AF;&#x5F15;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-29 14:07:40&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h3 class="mume-header" id="457-amcapiprofileget">4.5.7 /amc/api/profile/get</h3>
+
+<ul>
+<li>&#x529F;&#x80FD;&#xFF1A;&#x6839;&#x636E;ID&#x8FD4;&#x56DE;0&#x6216;1&#x6761;&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;&#x8BB0;&#x5F55;</li>
+<li>&#x53C2;&#x6570;&#xFF1A;JSONObject param<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span><span class="token string">&quot;201621018888&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre></li>
+<li>&#x8FD4;&#x56DE;&#xFF1A;Profile<pre data-role="codeBlock" data-info="json {.line-numbers}" class="language-json line-numbers"><span class="token punctuation">{</span>
+  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;201621018888&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;photo&quot;</span><span class="token operator">:</span> <span class="token string">&quot;repos/asset/image/avatar1/1.jpg&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;sex&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x7537;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;birthday&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1986-06-05&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;province&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x91CD;&#x5E86;&#x5E02;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x636E;&#x65F6;&#x636E;&#x5373;&#x7531;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;education&quot;</span><span class="token operator">:</span> <span class="token string">&quot;undefined&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;degree&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x5426;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;department&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x60C5;&#x8DEF;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;major&quot;</span><span class="token operator">:</span> <span class="token string">&quot;7&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;grade&quot;</span><span class="token operator">:</span> <span class="token string">&quot;39&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;clazz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;note&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&#x52A8;&#x4ECE;&#x672F;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;retime&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-29 08:34:52&quot;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#%E7%AC%AC04%E7%AB%A0-%E5%90%8E%E7%AB%AF%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1">&#x7B2C;04&#x7AE0; &#x540E;&#x7AEF;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;</a>
+<ul>
+<li><a href="#41-amcuser">4.1 amc.user</a>
+<ul>
+<li><a href="#411-amcapiuser">4.1.1 /amc/api/user</a></li>
+</ul>
+</li>
+<li><a href="#412-amcapiuserlist">4.1.2 /amc/api/user/list</a></li>
+<li><a href="#413-amcapiuserinsert">4.1.3 /amc/api/user/insert</a></li>
+<li><a href="#414-amcapiuserdelete">4.1.4 /amc/api/user/delete</a></li>
+<li><a href="#415-amcapiuserupdate">4.1.5 /amc/api/user/update</a></li>
+<li><a href="#416-amcapiuserfind">4.1.6 /amc/api/user/find</a></li>
+<li><a href="#417-amcapiuserget">4.1.7 /amc/api/user/get</a></li>
+<li><a href="#42-amcrole">4.2 amc.role</a>
+<ul>
+<li><a href="#421-amcapirole">4.2.1 /amc/api/role</a></li>
+<li><a href="#422-amcapirolelist">4.2.2 /amc/api/role/list</a></li>
+<li><a href="#423-amcapiroleinsert">4.2.3 /amc/api/role/insert</a></li>
+<li><a href="#424-amcapiroledelete">4.2.4 /amc/api/role/delete</a></li>
+<li><a href="#425-amcapiroleupdate">4.2.5 /amc/api/role/update</a></li>
+<li><a href="#426-amcapirolefind">4.2.6 /amc/api/role/find</a></li>
+<li><a href="#427-amcapiroleget">4.2.7 /amc/api/role/get</a></li>
+<li><a href="#428-amcapirolegets">4.2.8 /amc/api/role/gets</a></li>
+<li><a href="#429-amcapirolekeys">4.2.9 /amc/api/role/keys</a></li>
+</ul>
+</li>
+<li><a href="#43-amcmenu">4.3  amc.menu</a>
+<ul>
+<li><a href="#431-amcapimenu">4.3.1 /amc/api/menu</a></li>
+<li><a href="#432-amcapimenulist">4.3.2 /amc/api/menu/list</a></li>
+<li><a href="#433-amcapimenuinsert">4.3.3 /amc/api/menu/insert</a></li>
+<li><a href="#434-amcapimenudelete">4.3.4 /amc/api/menu/delete</a></li>
+<li><a href="#435-amcapimenuupdate">4.3.5 /amc/api/menu/update</a></li>
+<li><a href="#436-amcapimenufind">4.3.6 /amc/api/menu/find</a></li>
+<li><a href="#437-amcapimenuget">4.3.7 /amc/api/menu/get</a></li>
+<li><a href="#438-amcapimenutree">4.3.8 /amc/api/menu/tree</a></li>
+</ul>
+</li>
+<li><a href="#44-amcpermission">4.4  amc.permission</a>
+<ul>
+<li><a href="#441-amcapipermission">4.4.1 /amc/api/permission</a></li>
+<li><a href="#442-amcapipermissionlist">4.4.2 /amc/api/permission/list</a></li>
+<li><a href="#443-amcapipermissioninsert">4.4.3 /amc/api/permission/insert</a></li>
+<li><a href="#444-amcapipermissiondelete">4.4.4 /amc/api/permission/delete</a></li>
+<li><a href="#445-amcapipermissionupdate">4.4.5 /amc/api/permission/update</a></li>
+<li><a href="#446-amcapipermissionfind">4.4.6 /amc/api/permission/find</a></li>
+<li><a href="#447-amcapipermissionget">4.4.7 /amc/api/permission/get</a></li>
+</ul>
+</li>
+<li><a href="#45-amcprofile">4.5 amc.profile</a>
+<ul>
+<li><a href="#451-amcapiprofile">4.5.1 /amc/api/profile</a></li>
+<li><a href="#452-amcapiprofilelist">4.5.2 /amc/api/profile/list</a></li>
+<li><a href="#453-amcapiprofileinsert">4.5.3 /amc/api/profile/insert</a></li>
+<li><a href="#454-amcapiprofiledelete">4.5.4 /amc/api/profile/delete</a></li>
+<li><a href="#455-amcapiprofileupdate">4.5.5 /amc/api/profile/update</a></li>
+<li><a href="#456-amcapiprofilefind">4.5.6 /amc/api/profile/find</a></li>
+<li><a href="#457-amcapiprofileget">4.5.7 /amc/api/profile/get</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>
