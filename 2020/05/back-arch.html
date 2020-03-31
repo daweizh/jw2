@@ -1,0 +1,912 @@
+<!DOCTYPE html><html><head>
+      <title>back-arch</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+      
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+      <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66519574" charset="UTF-8"></script>      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="%E7%AC%AC05%E7%AB%A0-%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84">&#x7B2C;05&#x7AE0; &#x540E;&#x7AEF;&#x9879;&#x76EE;&#x67B6;&#x6784;</h1>
+
+<ul>
+<li>&#x540E;&#x7AEF;&#x9879;&#x76EE;&#x7684;&#x7ECF;&#x5178;&#x4E09;&#x5C42;&#x67B6;&#x6784;<br>
+<img src="images/back-arch-01.png" alt></li>
+<li>Spring Boot&#x5E94;&#x7528;&#x67B6;&#x6784;<br>
+<img src="images/back-arch-02.png" alt></li>
+</ul>
+<h2 class="mume-header" id="51-%E5%88%9B%E5%BB%BA%E9%BB%98%E8%AE%A4%E7%9A%84spring-starter-project">5.1 &#x521B;&#x5EFA;&#x9ED8;&#x8BA4;&#x7684;Spring Starter Project</h2>
+
+<ul>
+<li>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Spring Starter Project<br>
+<img src="images/amc-01.png" alt></li>
+<li>&#x8BBE;&#x7F6E;&#x9879;&#x76EE;&#x57FA;&#x672C;&#x5C5E;&#x6027;<br>
+<img src="images/amc-02.png" alt></li>
+<li>&#x4FDD;&#x6301;&#x57FA;&#x672C;&#x4F9D;&#x8D56;&#xFF0C;&#x70B9;&#x51FB;&#x5B8C;&#x6210;<br>
+<img src="images/amc-03.png" alt></li>
+<li>&#x9879;&#x76EE;&#x521B;&#x5EFA;&#x5B8C;&#x6210;<br>
+<img src="images/amc-04.png" alt></li>
+<li>&#x542F;&#x52A8;&#x9879;&#x76EE;<br>
+<img src="images/amc-05.png" alt></li>
+<li>&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x6253;&#x5F00;&#x9879;&#x76EE;&#x5E94;&#x7528;<br>
+<img src="images/amc-06.png" alt></li>
+</ul>
+<h2 class="mume-header" id="52-%E5%AF%B9amc%E9%A1%B9%E7%9B%AE%E8%BF%9B%E8%A1%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE">5.2 &#x5BF9;amc&#x9879;&#x76EE;&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x914D;&#x7F6E;</h2>
+
+<p><img src="images/tree-01.png" alt></p>
+<ul>
+<li>apidoc.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>UTF-8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Insert title here<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    Hello Apis!
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>index.html<pre data-role="codeBlock" data-info="html {.line-numbers}" class="language-html line-numbers"><span class="token doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>UTF-8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Insert title here<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    Hello AMC!
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>application.properties<pre data-role="codeBlock" data-info="properties {.line-numbers}" class="language-properties line-numbers"><span class="token attr-name">server.port</span><span class="token punctuation">=</span><span class="token attr-value">9000</span>
+
+<span class="token attr-name">spring.datasource.amc.url</span><span class="token punctuation">=</span><span class="token attr-value">jdbc:mysql://localhost:3308/core?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</span>
+<span class="token attr-name">spring.datasource.amc.username</span><span class="token punctuation">=</span><span class="token attr-value">root</span>
+<span class="token attr-name">spring.datasource.amc.password</span><span class="token punctuation">=</span><span class="token attr-value">123456</span>
+<span class="token attr-name">spring.datasource.amc.driver-class-name</span><span class="token punctuation">=</span><span class="token attr-value">com.mysql.cj.jdbc.Driver</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>log4j2.properties<pre data-role="codeBlock" data-info="properties {.line-numbers}" class="language-properties line-numbers"><span class="token attr-name">status</span> <span class="token punctuation">=</span> <span class="token attr-value">error</span>
+<span class="token attr-name">name</span> <span class="token punctuation">=</span> <span class="token attr-value">PropertiesConfig</span>
+
+<span class="token attr-name">filters</span> <span class="token punctuation">=</span> <span class="token attr-value">threshold</span>
+
+<span class="token attr-name">filter.threshold.type</span> <span class="token punctuation">=</span> <span class="token attr-value">ThresholdFilter</span>
+<span class="token attr-name">filter.threshold.level</span> <span class="token punctuation">=</span> <span class="token attr-value">debug</span>
+
+<span class="token attr-name">appenders</span> <span class="token punctuation">=</span> <span class="token attr-value">console</span>
+
+<span class="token attr-name">appender.console.type</span> <span class="token punctuation">=</span> <span class="token attr-value">Console</span>
+<span class="token attr-name">appender.console.name</span> <span class="token punctuation">=</span> <span class="token attr-value">STDOUT</span>
+<span class="token attr-name">appender.console.layout.type</span> <span class="token punctuation">=</span> <span class="token attr-value">PatternLayout</span>
+<span class="token attr-name">appender.console.layout.pattern</span> <span class="token punctuation">=</span> <span class="token attr-value">%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</span>
+
+<span class="token attr-name">rootLogger.level</span> <span class="token punctuation">=</span> <span class="token attr-value">debug</span>
+<span class="token attr-name">rootLogger.appenderRefs</span> <span class="token punctuation">=</span> <span class="token attr-value">stdout</span>
+<span class="token attr-name">rootLogger.appenderRef.stdout.ref</span> <span class="token punctuation">=</span> <span class="token attr-value">STDOUT</span>
+
+<span class="token comment">###&#x663E;&#x793A;SQL&#x8BED;&#x53E5;&#x90E8;&#x5206;</span>
+<span class="token attr-name">log4j.logger.com.ibatis</span><span class="token punctuation">=</span><span class="token attr-value">DEBUG</span>
+<span class="token attr-name">log4j.logger.com.ibatis.common.jdbc.SimpleDataSource</span><span class="token punctuation">=</span><span class="token attr-value">DEBUG</span>
+<span class="token attr-name">log4j.logger.com.ibatis.common.jdbc.ScriptRunner</span><span class="token punctuation">=</span><span class="token attr-value">DEBUG</span>
+<span class="token attr-name">log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate</span><span class="token punctuation">=</span><span class="token attr-value">DEBUG</span>
+<span class="token attr-name">log4j.logger.java.sql.Connection</span><span class="token punctuation">=</span><span class="token attr-value">DEBUG</span>
+<span class="token attr-name">log4j.logger.java.sql.Statement</span><span class="token punctuation">=</span><span class="token attr-value">DEBUG</span>
+<span class="token attr-name">log4j.logger.java.sql.PreparedStatement</span><span class="token punctuation">=</span><span class="token attr-value">DEBUG</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>build.gradle<pre data-role="codeBlock" data-info="groovy {.line-numbers}" class="language-groovy line-numbers">plugins <span class="token punctuation">{</span>
+  id <span class="token string">&apos;org.springframework.boot&apos;</span> version <span class="token string">&apos;2.2.6.RELEASE&apos;</span>
+  id <span class="token string">&apos;io.spring.dependency-management&apos;</span> version <span class="token string">&apos;1.0.9.RELEASE&apos;</span>
+  id <span class="token string">&apos;java&apos;</span>
+  id <span class="token string">&apos;war&apos;</span>
+<span class="token punctuation">}</span>
+
+group <span class="token operator">=</span> <span class="token string">&apos;amc&apos;</span>
+version <span class="token operator">=</span> <span class="token string">&apos;0.0.1-SNAPSHOT&apos;</span>
+sourceCompatibility <span class="token operator">=</span> <span class="token string">&apos;1.8&apos;</span>
+
+configurations <span class="token punctuation">{</span>
+  compileOnly <span class="token punctuation">{</span>
+    extendsFrom annotationProcessor
+  <span class="token punctuation">}</span>
+  all<span class="token operator">*.</span>exclude group<span class="token punctuation">:</span> <span class="token string">&apos;org.springframework.boot&apos;</span><span class="token punctuation">,</span> module<span class="token punctuation">:</span> <span class="token string">&apos;spring-boot-starter-logging&apos;</span>
+<span class="token punctuation">}</span>
+
+
+repositories <span class="token punctuation">{</span>
+  <span class="token function">mavenCentral</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+dependencies <span class="token punctuation">{</span>
+  implementation <span class="token string">&apos;org.springframework.boot:spring-boot-starter-thymeleaf&apos;</span>
+  implementation <span class="token string">&apos;org.springframework.boot:spring-boot-starter-web&apos;</span>
+  implementation <span class="token string">&apos;org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2&apos;</span>
+  implementation <span class="token string">&apos;org.springframework.boot:spring-boot-starter-log4j2&apos;</span>
+
+  compileOnly <span class="token string">&apos;org.projectlombok:lombok&apos;</span>
+  annotationProcessor <span class="token string">&apos;org.projectlombok:lombok&apos;</span>
+  implementation <span class="token string">&apos;com.alibaba:fastjson:1.2.68&apos;</span>
+
+  runtimeOnly <span class="token string">&apos;mysql:mysql-connector-java&apos;</span>
+
+  providedRuntime <span class="token string">&apos;org.springframework.boot:spring-boot-starter-tomcat&apos;</span>
+  <span class="token function">testImplementation</span><span class="token punctuation">(</span><span class="token string">&apos;org.springframework.boot:spring-boot-starter-test&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    exclude group<span class="token punctuation">:</span> <span class="token string">&apos;org.junit.vintage&apos;</span><span class="token punctuation">,</span> module<span class="token punctuation">:</span> <span class="token string">&apos;junit-vintage-engine&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+test <span class="token punctuation">{</span>
+  <span class="token function">useJUnitPlatform</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>&#x91CD;&#x542F;&#x5E94;&#x7528;</li>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x67E5;&#x770B;&#x5E94;&#x7528;<br>
+<img src="images/tree-02.png" alt></li>
+</ul>
+<h2 class="mume-header" id="53-%E5%B0%86%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E6%98%A0%E5%B0%84%E6%88%90%E5%8C%85%E7%BB%93%E6%9E%84">5.3 &#x5C06;&#x5E94;&#x7528;&#x67B6;&#x6784;&#x6620;&#x5C04;&#x6210;&#x5305;&#x7ED3;&#x6784;</h2>
+
+<p><img src="images/packages.png" alt></p>
+<h2 class="mume-header" id="54-%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0">5.4 &#x4EE3;&#x7801;&#x7ED3;&#x6784;&#x7684;&#x7B80;&#x5355;&#x5B9E;&#x73B0;</h2>
+
+<p><img src="images/amc-code-01.png" alt></p>
+<ul>
+<li>com.controller.ApisController.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>ui</span><span class="token punctuation">.</span><span class="token class-name">Model</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">PathVariable</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">RequestMapping</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">RequestMethod</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">RestController</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet</span><span class="token punctuation">.</span><span class="token class-name">ModelAndView</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">lombok<span class="token punctuation">.</span>extern<span class="token punctuation">.</span>slf4j</span><span class="token punctuation">.</span><span class="token class-name">Slf4j</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Slf4j</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/apis&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ApisController</span> <span class="token punctuation">{</span>
+
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> method <span class="token operator">=</span> <span class="token class-name">RequestMethod</span><span class="token punctuation">.</span>GET<span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">ModelAndView</span> <span class="token function">getDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span>  <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;url:/apis&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">ModelAndView</span> mv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ModelAndView</span><span class="token punctuation">(</span><span class="token string">&quot;apidoc.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> mv<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/{name}&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">ModelAndView</span> <span class="token function">apisHelp1</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;url:/apis/&quot;</span><span class="token operator">+</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">ModelAndView</span> mv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ModelAndView</span><span class="token punctuation">(</span><span class="token string">&quot;apidoc.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> mv<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/{pack}/{name}&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">ModelAndView</span> <span class="token function">apisHelp2</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">&quot;pack&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> pack<span class="token punctuation">,</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> name<span class="token punctuation">,</span><span class="token class-name">Model</span> model<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;url:/apis/&quot;</span><span class="token operator">+</span>pack<span class="token operator">+</span><span class="token string">&quot;/&quot;</span><span class="token operator">+</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">ModelAndView</span> mv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ModelAndView</span><span class="token punctuation">(</span><span class="token string">&quot;apidoc.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> mv<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.controller.amc.UserController.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>controller<span class="token punctuation">.</span>amc</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">Autowired</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">RequestBody</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">RequestMapping</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">RequestMethod</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">RestController</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet</span><span class="token punctuation">.</span><span class="token class-name">ModelAndView</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>fastjson</span><span class="token punctuation">.</span><span class="token class-name">JSONObject</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">.</span><span class="token class-name">ListResult</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">.</span><span class="token class-name">Message</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">.</span><span class="token class-name">PageOptions</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity<span class="token punctuation">.</span>amc</span><span class="token punctuation">.</span><span class="token class-name">User</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>service<span class="token punctuation">.</span>amc</span><span class="token punctuation">.</span><span class="token class-name">IUserService</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">lombok<span class="token punctuation">.</span>extern<span class="token punctuation">.</span>slf4j</span><span class="token punctuation">.</span><span class="token class-name">Slf4j</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Slf4j</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/user&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserController</span> <span class="token punctuation">{</span>
+
+  <span class="token annotation punctuation">@Autowired</span>
+  <span class="token keyword">private</span> <span class="token class-name">IUserService</span> userService<span class="token punctuation">;</span>
+  
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> method <span class="token operator">=</span> <span class="token class-name">RequestMethod</span><span class="token punctuation">.</span>GET<span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">ModelAndView</span> <span class="token function">getDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span>  <span class="token punctuation">{</span>
+    <span class="token class-name">ModelAndView</span> mv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ModelAndView</span><span class="token punctuation">(</span><span class="token string">&quot;apis.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> mv<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;/list&quot;</span><span class="token punctuation">,</span>method <span class="token operator">=</span> <span class="token class-name">RequestMethod</span><span class="token punctuation">.</span>POST<span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">ListResult</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUsers</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">PageOptions</span> page<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>page<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">getUsers</span><span class="token punctuation">(</span>page<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;/insert&quot;</span><span class="token punctuation">,</span>method <span class="token operator">=</span> <span class="token class-name">RequestMethod</span><span class="token punctuation">.</span>POST<span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">Message</span> <span class="token function">insertUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">User</span> user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">insertUser</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Message</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;/core/user/insert&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;/delete&quot;</span><span class="token punctuation">,</span>method<span class="token operator">=</span><span class="token class-name">RequestMethod</span><span class="token punctuation">.</span>POST<span class="token punctuation">,</span>produces<span class="token operator">=</span><span class="token string">&quot;application/json;charset=UTF-8&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">Message</span> <span class="token function">deleteUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">JSONObject</span> param<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">deleteUser</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Message</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;/core/user/delete&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;/update&quot;</span><span class="token punctuation">,</span>method<span class="token operator">=</span><span class="token class-name">RequestMethod</span><span class="token punctuation">.</span>POST<span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">Message</span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">User</span> user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    userService<span class="token punctuation">.</span><span class="token function">updateUser</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Message</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">&quot;/core/user/update&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;/find&quot;</span><span class="token punctuation">,</span>method<span class="token operator">=</span><span class="token class-name">RequestMethod</span><span class="token punctuation">.</span>POST<span class="token punctuation">,</span>produces<span class="token operator">=</span><span class="token string">&quot;application/json;charset=UTF-8&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">findUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">JSONObject</span> param<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">findUser</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;keywords&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;/get&quot;</span><span class="token punctuation">,</span>method<span class="token operator">=</span><span class="token class-name">RequestMethod</span><span class="token punctuation">.</span>POST<span class="token punctuation">,</span>produces<span class="token operator">=</span><span class="token string">&quot;application/json;charset=UTF-8&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">JSONObject</span> param<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> userService<span class="token punctuation">.</span><span class="token function">getUser</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.entity.KeyValue.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span><span class="token class-name">Data</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">KeyValue</span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token class-name">String</span> key <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token class-name">String</span> value <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token class-name">KeyValue</span><span class="token punctuation">(</span><span class="token class-name">String</span> key<span class="token punctuation">,</span><span class="token class-name">String</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>key <span class="token operator">=</span> key<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.entity.ListResult.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">List</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span><span class="token class-name">Data</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ListResult</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> data <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">int</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">ListResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">ListResult</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">ListResult</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span><span class="token keyword">int</span> size<span class="token punctuation">,</span><span class="token keyword">int</span> total<span class="token punctuation">,</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>index <span class="token operator">=</span> index<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>size <span class="token operator">=</span> size<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>total <span class="token operator">=</span> total<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.entity.Message.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span><span class="token class-name">Data</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Message</span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token keyword">int</span> status <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token class-name">String</span> message <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">Message</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">Message</span><span class="token punctuation">(</span><span class="token keyword">int</span> status<span class="token punctuation">,</span><span class="token class-name">String</span> message<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">=</span> status<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>message <span class="token operator">=</span> message<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.entity.PageOptions.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span><span class="token class-name">Data</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PageOptions</span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token keyword">boolean</span> loading <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">int</span> pageIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">int</span> pageSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token class-name">String</span> sortName <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token class-name">String</span> sortValue <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span> <span class="token class-name">String</span> keywords <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.entity.amc.User.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>entity<span class="token punctuation">.</span>amc</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span><span class="token class-name">Data</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+TABLE: `amc_user`  (
+  `username` 	varchar		NOT NULL 					COMMENT &apos;&#x7528;&#x6237;&#x540D;&#xFF08;&#x8D26;&#x6237;&#x540D;&#xFF09;&apos;,
+  `password` 	varchar		DEFAULT NULL 				COMMENT &apos;&#x8D26;&#x6237;&#x5BC6;&#x7801;&apos;,
+  `name` 		varchar		DEFAULT NULL 				COMMENT &apos;&#x7528;&#x6237;&#x59D3;&#x540D;&apos;,
+  `email` 	varchar		DEFAULT NULL 				COMMENT &apos;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&apos;,
+  `phone` 	varchar		DEFAULT NULL 				COMMENT &apos;&#x624B;&#x673A;&#x53F7;&#x7801;&apos;,
+  `role` 		varchar		DEFAULT NULL 				COMMENT &apos;&#x89D2;&#x8272;ID&apos;,
+  `secret`	varchar		DEFAULT NULL 				COMMENT &apos;&#x4FDD;&#x5BC6;&#x5B57;&apos;,
+  `retime`	timestamp	DEFAULT CURRENT_TIMESTAMP	COMMENT &apos;&#x672C;&#x8BB0;&#x5F55;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&apos;,
+  PRIMARY KEY (`username`) USING BTREE
+)
+COMMENT = &apos;&#x7528;&#x6237;&#x8868;&apos; 
+**/</span>
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span>  username   <span class="token operator">=</span>  <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span>  password   <span class="token operator">=</span>  <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span>  name       <span class="token operator">=</span>  <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span>  email      <span class="token operator">=</span>  <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span>  phone      <span class="token operator">=</span>  <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span>  role       <span class="token operator">=</span>  <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span>  secret     <span class="token operator">=</span>  <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span>  retime     <span class="token operator">=</span>  <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.mapper.amc.IUserMapper.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>mapper<span class="token punctuation">.</span>amc</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">List</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>ibatis<span class="token punctuation">.</span>annotations</span><span class="token punctuation">.</span><span class="token class-name">Mapper</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>ibatis<span class="token punctuation">.</span>annotations</span><span class="token punctuation">.</span><span class="token class-name">Param</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity<span class="token punctuation">.</span>amc</span><span class="token punctuation">.</span><span class="token class-name">User</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Mapper</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IUserMapper</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getTotal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getTotalByCond</span><span class="token punctuation">(</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;cond&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> cond
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUsers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUserPage</span><span class="token punctuation">(</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;pageStart&quot;</span><span class="token punctuation">)</span> <span class="token keyword">int</span> pageStart<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;pageSize&quot;</span><span class="token punctuation">)</span> <span class="token keyword">int</span> pageSize
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUserPageBySort</span><span class="token punctuation">(</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;pageStart&quot;</span><span class="token punctuation">)</span> <span class="token keyword">int</span> pageStart<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;pageSize&quot;</span><span class="token punctuation">)</span> <span class="token keyword">int</span> pageSize<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;sortName&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> sortName<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;sortValue&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> sortValue
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUserPageByCond</span><span class="token punctuation">(</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;pageStart&quot;</span><span class="token punctuation">)</span> <span class="token keyword">int</span> pageStart<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;pageSize&quot;</span><span class="token punctuation">)</span> <span class="token keyword">int</span> pageSize<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;cond&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> cond
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>	
+
+  <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUserPageByCondSort</span><span class="token punctuation">(</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;pageStart&quot;</span><span class="token punctuation">)</span> <span class="token keyword">int</span> pageStart<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;pageSize&quot;</span><span class="token punctuation">)</span> <span class="token keyword">int</span> pageSize<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;cond&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> cond<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;sortName&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> sortName<span class="token punctuation">,</span>
+    <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;sortValue&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> sortValue
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">insertUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;user&quot;</span><span class="token punctuation">)</span> <span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">deleteUserById</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;user&quot;</span><span class="token punctuation">)</span> <span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">findUsersByCond</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;cond&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> cond<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getUserById</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.service.amc.IUserService.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>service<span class="token punctuation">.</span>amc</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">.</span><span class="token class-name">ListResult</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">.</span><span class="token class-name">PageOptions</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity<span class="token punctuation">.</span>amc</span><span class="token punctuation">.</span><span class="token class-name">User</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IUserService</span> <span class="token punctuation">{</span>
+  
+  <span class="token keyword">public</span> <span class="token class-name">ListResult</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUsers</span><span class="token punctuation">(</span><span class="token class-name">PageOptions</span> page<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">insertUser</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">deleteUser</span><span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">findUser</span><span class="token punctuation">(</span><span class="token class-name">String</span> keywords<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.service.amc.impl.UserServiceImpl.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>service<span class="token punctuation">.</span>amc<span class="token punctuation">.</span>impl</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">Autowired</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype</span><span class="token punctuation">.</span><span class="token class-name">Service</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>fastjson</span><span class="token punctuation">.</span><span class="token class-name">JSONObject</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">.</span><span class="token class-name">ListResult</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity</span><span class="token punctuation">.</span><span class="token class-name">PageOptions</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>entity<span class="token punctuation">.</span>amc</span><span class="token punctuation">.</span><span class="token class-name">User</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>mapper<span class="token punctuation">.</span>amc</span><span class="token punctuation">.</span><span class="token class-name">IUserMapper</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>service<span class="token punctuation">.</span>amc</span><span class="token punctuation">.</span><span class="token class-name">IUserService</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">lombok<span class="token punctuation">.</span>extern<span class="token punctuation">.</span>slf4j</span><span class="token punctuation">.</span><span class="token class-name">Slf4j</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Slf4j</span>
+<span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">IUserService</span> <span class="token punctuation">{</span>
+
+  <span class="token annotation punctuation">@Autowired</span>
+  <span class="token keyword">private</span> <span class="token class-name">IUserMapper</span> userMapper<span class="token punctuation">;</span>
+  
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token class-name">ListResult</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">getUsers</span><span class="token punctuation">(</span><span class="token class-name">PageOptions</span> page<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>page<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">ListResult</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> lr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ListResult</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token class-name">String</span> cond <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> sortName <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> sortValue <span class="token operator">=</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> pageIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> pageSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> pageStart <span class="token operator">=</span> <span class="token punctuation">(</span>page<span class="token punctuation">.</span><span class="token function">getPageIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>page<span class="token punctuation">.</span><span class="token function">getPageSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    lr<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span>userMapper<span class="token punctuation">.</span><span class="token function">getUserPageByCondSort</span><span class="token punctuation">(</span>pageStart<span class="token punctuation">,</span> pageSize<span class="token punctuation">,</span> cond<span class="token punctuation">,</span> sortName<span class="token punctuation">,</span> sortValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    lr<span class="token punctuation">.</span><span class="token function">setIndex</span><span class="token punctuation">(</span>pageIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    lr<span class="token punctuation">.</span><span class="token function">setSize</span><span class="token punctuation">(</span>pageSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    lr<span class="token punctuation">.</span><span class="token function">setTotal</span><span class="token punctuation">(</span>userMapper<span class="token punctuation">.</span><span class="token function">getTotalByCond</span><span class="token punctuation">(</span>cond<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// TODO Auto-generated method stub</span>
+    <span class="token keyword">return</span> lr<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">insertUser</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO Auto-generated method stub</span>
+    
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">deleteUser</span><span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO Auto-generated method stub</span>
+    
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateUser</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO Auto-generated method stub</span>
+    
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">findUser</span><span class="token punctuation">(</span><span class="token class-name">String</span> keywords<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO Auto-generated method stub</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO Auto-generated method stub</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="55-%E5%85%B1%E4%BA%AB%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1">5.5 &#x5171;&#x4EAB;&#x4EE3;&#x7801;&#x8BBE;&#x8BA1;</h2>
+
+<p><img src="images/amc-code-02.png" alt></p>
+<ul>
+<li>com.share.common.Context.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>share<span class="token punctuation">.</span>common</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Context</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.share.common.FilenameUtils.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>share<span class="token punctuation">.</span>common</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FilenameUtils</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.share.common.Markdown.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>share<span class="token punctuation">.</span>common</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Markdown</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.share.config.DataSourceAMC.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>share<span class="token punctuation">.</span>config</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>sql</span><span class="token punctuation">.</span><span class="token class-name">DataSource</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>ibatis<span class="token punctuation">.</span>session</span><span class="token punctuation">.</span><span class="token class-name">SqlSessionFactory</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>mybatis<span class="token punctuation">.</span>spring</span><span class="token punctuation">.</span><span class="token class-name">SqlSessionFactoryBean</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>mybatis<span class="token punctuation">.</span>spring</span><span class="token punctuation">.</span><span class="token class-name">SqlSessionTemplate</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>mybatis<span class="token punctuation">.</span>spring<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">MapperScan</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">Qualifier</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>context<span class="token punctuation">.</span>properties</span><span class="token punctuation">.</span><span class="token class-name">ConfigurationProperties</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>jdbc</span><span class="token punctuation">.</span><span class="token class-name">DataSourceBuilder</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">Bean</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">Configuration</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>jdbc<span class="token punctuation">.</span>datasource</span><span class="token punctuation">.</span><span class="token class-name">DataSourceTransactionManager</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@MapperScan</span><span class="token punctuation">(</span>basePackages<span class="token operator">=</span><span class="token string">&quot;com.mapper.amc&quot;</span><span class="token punctuation">,</span>sqlSessionTemplateRef<span class="token operator">=</span><span class="token string">&quot;amcSqlSessionTemplate&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DataSourceAMC</span> <span class="token punctuation">{</span>
+  <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;amcDataSource&quot;</span><span class="token punctuation">)</span>
+  <span class="token annotation punctuation">@ConfigurationProperties</span><span class="token punctuation">(</span>prefix <span class="token operator">=</span> <span class="token string">&quot;spring.datasource.amc&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">DataSource</span> <span class="token function">testDataSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token class-name">DataSourceBuilder</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;amcSqlSessionFactory&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">SqlSessionFactory</span> <span class="token function">testSqlSessionFactory</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">&quot;amcDataSource&quot;</span><span class="token punctuation">)</span> <span class="token class-name">DataSource</span> dataSource<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+    <span class="token class-name">SqlSessionFactoryBean</span> bean <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SqlSessionFactoryBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bean<span class="token punctuation">.</span><span class="token function">setDataSource</span><span class="token punctuation">(</span>dataSource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> bean<span class="token punctuation">.</span><span class="token function">getObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;amcTransactionManager&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">DataSourceTransactionManager</span> <span class="token function">testTransactionManager</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">&quot;amcDataSource&quot;</span><span class="token punctuation">)</span> <span class="token class-name">DataSource</span> dataSource<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">DataSourceTransactionManager</span><span class="token punctuation">(</span>dataSource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;amcSqlSessionTemplate&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">public</span> <span class="token class-name">SqlSessionTemplate</span> <span class="token function">testSqlSessionTemplate</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">&quot;amcSqlSessionFactory&quot;</span><span class="token punctuation">)</span> <span class="token class-name">SqlSessionFactory</span> sqlSessionFactory<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">SqlSessionTemplate</span><span class="token punctuation">(</span>sqlSessionFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.share.shiro.ShiroConfig.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>share<span class="token punctuation">.</span>shiro</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ShiroConfig</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.share.shiro.UserRealm.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>share<span class="token punctuation">.</span>shiro</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserRealm</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.share.utils.GlobalException.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>share<span class="token punctuation">.</span>utils</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GlobalException</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+<li>com.share.utils.WebLog.java<pre data-role="codeBlock" data-info="java {.line-numbers}" class="language-java line-numbers"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>share<span class="token punctuation">.</span>utils</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">WebLog</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre></li>
+</ul>
+<h2 class="mume-header" id="56-%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E6%B5%8B%E8%AF%95apis">5.6 &#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x6D4B;&#x8BD5;APIs</h2>
+
+<ul>
+<li><a href="http://localhost:9000/apis">http://localhost:9000/apis</a></li>
+<li><a href="http://localhost:9000/apis/name">http://localhost:9000/apis/name</a></li>
+<li><a href="http://localhost:9000/apis/pack/name">http://localhost:9000/apis/pack/name</a></li>
+<li><a href="http://localhost:9000/user">http://localhost:9000/user</a></li>
+<li><a href="http://localhost:9000/user/list">http://localhost:9000/user/list</a></li>
+<li><a href="http://localhost:9000/user/insert">http://localhost:9000/user/insert</a></li>
+<li><a href="http://localhost:9000/user/delete">http://localhost:9000/user/delete</a></li>
+<li><a href="http://localhost:9000/user/update">http://localhost:9000/user/update</a></li>
+<li><a href="http://localhost:9000/user/find">http://localhost:9000/user/find</a></li>
+<li><a href="http://localhost:9000/user/get">http://localhost:9000/user/get</a></li>
+</ul>
+<h2 class="mume-header" id="57-%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98">5.7 &#x9879;&#x76EE;&#x5B9E;&#x6218;</h2>
+
+<ol>
+<li>TAM<br>
+<img src="images/back-arch-03.png" alt></li>
+<li>SAM<br>
+<img src="images/back-arch-04.png" alt></li>
+</ol>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#%E7%AC%AC05%E7%AB%A0-%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84">&#x7B2C;05&#x7AE0; &#x540E;&#x7AEF;&#x9879;&#x76EE;&#x67B6;&#x6784;</a>
+<ul>
+<li><a href="#51-%E5%88%9B%E5%BB%BA%E9%BB%98%E8%AE%A4%E7%9A%84spring-starter-project">5.1 &#x521B;&#x5EFA;&#x9ED8;&#x8BA4;&#x7684;Spring Starter Project</a></li>
+<li><a href="#52-%E5%AF%B9amc%E9%A1%B9%E7%9B%AE%E8%BF%9B%E8%A1%8C%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE">5.2 &#x5BF9;amc&#x9879;&#x76EE;&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x914D;&#x7F6E;</a></li>
+<li><a href="#53-%E5%B0%86%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E6%98%A0%E5%B0%84%E6%88%90%E5%8C%85%E7%BB%93%E6%9E%84">5.3 &#x5C06;&#x5E94;&#x7528;&#x67B6;&#x6784;&#x6620;&#x5C04;&#x6210;&#x5305;&#x7ED3;&#x6784;</a></li>
+<li><a href="#54-%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0">5.4 &#x4EE3;&#x7801;&#x7ED3;&#x6784;&#x7684;&#x7B80;&#x5355;&#x5B9E;&#x73B0;</a></li>
+<li><a href="#55-%E5%85%B1%E4%BA%AB%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1">5.5 &#x5171;&#x4EAB;&#x4EE3;&#x7801;&#x8BBE;&#x8BA1;</a></li>
+<li><a href="#56-%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E6%B5%8B%E8%AF%95apis">5.6 &#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x6D4B;&#x8BD5;APIs</a></li>
+<li><a href="#57-%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98">5.7 &#x9879;&#x76EE;&#x5B9E;&#x6218;</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">&#x2261;</a>
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  
+    </body></html>

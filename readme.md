@@ -6,6 +6,9 @@
     - 第02章 ![](assets/me/img/handout16.png)[准备一台计算机](2020/02/computer.html)，![](assets/me/img/video16.png)[部署服务器软件](2020/02/doit.html)
     - 第03章 ![](assets/me/img/handout16.png)[需求分析概要](2020/03/req-ana-sum.html)，![](assets/me/img/video16.png)[维护数据库表](2020/03/doit.html)
     - 第04章 ![](assets/me/img/handout16.png)[后端接口设计](2020/04/api-and-arch.html)，![](assets/me/img/video16.png)[启动后端Spring Boot项目](2020/04/doit.html)
+    - 第05章 ![](assets/me/img/handout16.png)[后端项目架构](2020/05/back-arch.html)<!--，![](assets/me/img/video16.png)[启动后端Spring Boot项目](2020/04/doit.html)-->
+
+
 2. 2019讲义
     - 第01章 [简介](2019/handout/01/intro.html)
     - 第02章 [需求和分析](2019/handout/02/req-ana.html)
